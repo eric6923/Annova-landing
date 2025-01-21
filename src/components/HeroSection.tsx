@@ -112,7 +112,7 @@ const HeroSection = () => {
             className="text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-tight"
           >
             Transforming Ideas into
-            <span className="bg-gradient-to-r from-violet-300 to-violet-400 text-transparent bg-clip-text"> Digital Reality</span>
+            <span className="bg-gradient-to-r from-violet-200 via-violet-300 to-violet-400 text-transparent bg-clip-text"> Digital Reality</span>
           </motion.h1>
 
           <motion.p 

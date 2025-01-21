@@ -1,5 +1,6 @@
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Palette, Globe, Smartphone, Database, Cloud, ArrowRight } from 'lucide-react';
+import { Code, Palette, Globe, Smartphone, Database, Cloud } from 'lucide-react';
 
 const services = [
   {
@@ -36,7 +37,7 @@ const services = [
 
 const ServicesSection = () => {
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-16 relative overflow-hidden">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -45,7 +46,7 @@ const ServicesSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">Our Services</h2>
+          <h2 className="text-4xl md:text-4xl font-bold mb-4">Our <span className="text-violet-500">Services</span></h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
             We offer a comprehensive suite of digital solutions to help your business thrive in the modern world.
           </p>
@@ -55,23 +56,20 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ scale: 1.02 }}
               className="relative group"
             >
-              <div className="bg-black/40 backdrop-blur-sm p-8 rounded-2xl border border-violet-500/20 hover:border-violet-500/40 transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-b from-violet-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+              <div className="bg-gradient-to-br from-violet-900/20 to-black p-8 rounded-2xl border border-violet-500/20 hover:border-violet-500/40 transition-all duration-300">
+                <div className="absolute inset-0 bg-violet-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
                 <div className="relative z-10">
-                  <div className="text-violet-500 mb-4">{service.icon}</div>
-                  <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
-                  <p className="text-gray-400">{service.description}</p>
-                  <button className="mt-6 text-violet-400 hover:text-violet-300 flex items-center gap-2">
-                    Learn More
-                    <ArrowRight size={16} />
-                  </button>
+                  <div className="text-violet-500 mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-2xl font-semibold mb-3">{service.title}</h3>
+                  <p className="text-gray-400 leading-relaxed">{service.description}</p>
                 </div>
               </div>
             </motion.div>

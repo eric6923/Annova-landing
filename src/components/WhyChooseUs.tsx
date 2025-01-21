@@ -36,7 +36,7 @@ const WhyChooseUs = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">Why Choose Us</h2>
+          <h2 className="text-4xl font-bold mb-4">Why <span className='text-violet-500'>Choose Us</span></h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
             We bring together expertise, innovation, and dedication to deliver exceptional results.
           </p>
