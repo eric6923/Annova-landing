@@ -37,7 +37,7 @@ const services = [
 
 const ServicesSection = () => {
   return (
-    <section className="py-16 relative overflow-hidden">
+    <section className=" relative overflow-hidden">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -46,7 +46,7 @@ const ServicesSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-4xl font-bold mb-4">Our <span className="text-violet-500">Services</span></h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Our <span className="text-violet-500">Services</span></h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
             We offer a comprehensive suite of digital solutions to help your business thrive in the modern world.
           </p>
