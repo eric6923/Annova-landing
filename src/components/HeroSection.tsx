@@ -112,7 +112,7 @@ const HeroSection = () => {
             className="text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-tight"
           >
             Transforming Ideas into
-            <span className="bg-gradient-to-r from-violet-200 via-violet-300 to-violet-400 text-transparent bg-clip-text"> Digital Reality</span>
+            <span className="bg-gradient-to-r from-violet-300 via-violet-400 to-violet-200 text-transparent bg-clip-text"> Digital Reality</span>
           </motion.h1>
 
           <motion.p 
@@ -126,11 +126,11 @@ const HeroSection = () => {
             variants={itemVariants}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 md:pt-8"
           >
-            <button className="w-full sm:w-auto px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 text-sm sm:text-base bg-violet-600 hover:bg-violet-700 text-white rounded-full flex items-center justify-center gap-2 transition-all transform hover:scale-105">
+            <button className="w-3/4 sm:w-auto px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 text-sm sm:text-base bg-violet-600 hover:bg-violet-700 text-white rounded-full flex items-center justify-center gap-2 transition-all transform hover:scale-105">
               <span>Get Started</span>
               <ArrowRight size={18} className="w-4 sm:w-5" />
             </button>
-            <button className="w-full sm:w-auto px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 text-sm sm:text-base border border-violet-500 text-white rounded-full hover:bg-violet-500/10 transition-all">
+            <button className="w-3/4 sm:w-auto px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 text-sm sm:text-base border border-violet-500 text-white rounded-full hover:bg-violet-500/10 transition-all">
               View Our Work
             </button>
           </motion.div>
