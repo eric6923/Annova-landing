@@ -36,7 +36,7 @@ const WhyChooseUs = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">Why <span className='text-violet-500'>Choose Us</span></h2>
+          <h2 className="text-5xl font-bold mb-4">Why <span className='text-violet-500'>Choose Us</span></h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
             We bring together expertise, innovation, and dedication to deliver exceptional results.
           </p>
@@ -55,7 +55,7 @@ const WhyChooseUs = () => {
               <div className="bg-gradient-to-br from-violet-900/20 to-black p-8 rounded-2xl border border-violet-500/20 hover:border-violet-500/40 transition-all duration-300">
                 <div className="absolute inset-0 bg-violet-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
                 <div className="relative z-10">
-                  <div className="text-violet-500 mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-violet-500 mb-4 transform group-hover:scale-105 transition-transform duration-300">
                     {reason.icon}
                   </div>
                   <h3 className="text-2xl font-semibold mb-3">{reason.title}</h3>

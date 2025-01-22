@@ -60,7 +60,7 @@ const Header = () => {
                   className="h-9 w-auto rounded-full"
                 />
                 <span className="text-white font-bold text-xl tracking-tight bg-gradient-to-r from-violet-400 to-violet-200 bg-clip-text text-transparent">
-                  Annova
+                  Anovas
                 </span>
               </motion.div>
 
