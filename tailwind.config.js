@@ -21,6 +21,9 @@ export default {
       animation: {
         'fade-in': 'fadeIn 1s ease-out forwards',
         'slide-up': 'slideUp 0.5s ease-out forwards',
+        'drift-1': 'drift1 25s ease-in-out infinite',
+        'float': 'float 15s ease-in-out infinite',
+        'glow-slow': 'staticGlow 1s forwards', // Changed to static glow
       },
       keyframes: {
         fadeIn: {
@@ -30,6 +33,28 @@ export default {
         slideUp: {
           '0%': { transform: 'translateY(100%)' },
           '100%': { transform: 'translateY(0)' },
+        },
+        drift1: {
+          '0%': { transform: 'translate(-50%, -50%) translateX(-3px)' },
+          '25%': { transform: 'translate(-50%, -50%) translate(3px, 3px)' },
+          '50%': { transform: 'translate(-50%, -50%) translateX(-3px)' },
+          '75%': { transform: 'translate(-50%, -50%) translate(3px, -3px)' },
+          '100%': { transform: 'translate(-50%, -50%) translateX(-3px)' },
+        },
+        float: {
+          '0%, 100%': { 
+            transform: 'translate(-50%, -50%) scale(1)',
+            opacity: '0.15'
+          },
+          '50%': { 
+            transform: 'translate(-50%, -50%) scale(1.03)',
+            opacity: '0.12'
+          },
+        },
+        staticGlow: {
+          '0%, 100%': { 
+            boxShadow: '0 0 20px 5px rgba(139, 92, 246, 0.3), inset 0 0 20px 5px rgba(139, 92, 246, 0.3)'
+          }
         },
       },
     },

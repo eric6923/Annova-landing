@@ -1,7 +1,32 @@
+"use client";
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 const HeroSection = () => {
+  // State for shooting stars
+  const [shootingStars, setShootingStars] = useState<Array<{ id: number; delay: number }>>([]);
+  
+  // State for background stars
+  const [stars, setStars] = useState<Array<{ id: number; size: number }>>([]);
+
+  // Initialize stars on component mount
+  useEffect(() => {
+    // Initialize shooting stars
+    const shootingStarsArray = Array.from({ length: 20 }).map((_, i) => ({
+      id: i,
+      delay: Math.random() * 10,
+    }));
+    setShootingStars(shootingStarsArray);
+
+    // Initialize background stars
+    const starsArray = Array.from({ length: 150 }).map((_, i) => ({
+      id: i,
+      size: Math.random() * 2,
+    }));
+    setStars(starsArray);
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -27,7 +52,7 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen bg-gradient-to-b from-black via-violet-950 to-black overflow-hidden">
-      {/* Animated Background Elements */}
+      {/* Background Elements */}
       <div className="absolute inset-0">
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(124,58,237,0.1),rgba(0,0,0,0))]"></div>
@@ -39,6 +64,39 @@ const HeroSection = () => {
           transition={{ duration: 1.5 }}
           className="absolute w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDEyNCw1OCwyMzcsMC4xKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')]"
         ></motion.div>
+
+        {/* Shooting Stars */}
+        <div className="fixed inset-0">
+          {shootingStars.map((star) => (
+            <span
+              key={star.id}
+              style={{
+                top: Math.random() * 100 + "%",
+                left: Math.random() * 100 + "%",
+                animationDelay: star.delay + "s",
+              }}
+              className="absolute h-0.5 w-0.5 rotate-45 animate-meteor rounded-[9999px] bg-slate-500 shadow-[0_0_0_1px_#ffffff10]"
+            />
+          ))}
+        </div>
+
+        {/* Background Stars */}
+        <div className="fixed inset-0">
+          {stars.map((star) => (
+            <span
+              key={star.id}
+              style={{
+                top: Math.random() * 100 + "%",
+                left: Math.random() * 100 + "%",
+                width: star.size + "px",
+                height: star.size + "px",
+                animationDelay: Math.random() * 10 + "s",
+                animationDuration: Math.random() * 20 + 20 + "s",
+              }}
+              className="absolute rounded-full bg-white opacity-[0.15] animate-twinkle"
+            />
+          ))}
+        </div>
 
         {/* Animated Circles */}
         <motion.div
@@ -67,35 +125,6 @@ const HeroSection = () => {
             delay: 1
           }}
           className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl"
-        />
-
-        {/* Floating Particles */}
-        <motion.div
-          initial={{ y: 0, opacity: 0.3 }}
-          animate={{ 
-            y: [-20, 20],
-            opacity: [0.3, 0.6, 0.3]
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-          className="absolute top-1/3 right-1/3 w-4 h-4 bg-violet-400 rounded-full blur-sm"
-        />
-        <motion.div
-          initial={{ y: 0, opacity: 0.3 }}
-          animate={{ 
-            y: [20, -20],
-            opacity: [0.3, 0.6, 0.3]
-          }}
-          transition={{
-            duration: 7,
-            repeat: Infinity,
-            repeatType: "reverse",
-            delay: 1
-          }}
-          className="absolute top-2/3 left-1/3 w-3 h-3 bg-violet-300 rounded-full blur-sm"
         />
       </div>
 
