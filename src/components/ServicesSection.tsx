@@ -106,7 +106,7 @@ export default function ServicesSection() {
             <div
               className={clsx(
                 { "translate-y-8 opacity-0": !isActive },
-                "flex justify-center transition-[transform,opacity] duration-[--duration]",
+                "flex justify-center mt-2 sm:mt-6 transition-[transform,opacity] duration-[--duration]",
               )}>
               <div className="
                 relative rounded-full border-2 border-violet-500 px-8 py-2 text-base font-medium
