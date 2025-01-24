@@ -56,6 +56,8 @@ interface Brand {
 }
 
 const WorkedWith: React.FC = () => {
+  const [isAnimating, setIsAnimating] = useState(true);
+  
   const stats: Stat[] = [
     { number: '150+', label: 'Projects Completed', fullNumber: 150 },
     { number: '50+', label: 'Happy Clients', fullNumber: 50 },
@@ -73,7 +75,7 @@ const WorkedWith: React.FC = () => {
   ];
 
   return (
-    <section className="relative min-h-screen w-full px-8 py-2 overflow-hidden bg-black">
+    <section className="relative min-h-screen w-full px-4 sm:px-8 py-2 overflow-hidden bg-black">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(124,58,237,0.03),rgba(0,0,0,0))]"></div>
@@ -83,11 +85,11 @@ const WorkedWith: React.FC = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-violet-600/5 rounded-full blur-[140px] animate-float"></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-500/4 rounded-full blur-[120px] animate-drift-1"></div>
         
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDEyNCw1OCwyMzcsMC4wMykiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDEyNCw1OCwyMzcsMC4wMykiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-20"></div>
         
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent"></div>
       </div>
-
+  
       {/* Content */}
       <ScrollReveal offset={200} className="relative z-10 mx-auto max-w-7xl [--duration:800ms]">
         {(isActive) => (
@@ -98,7 +100,7 @@ const WorkedWith: React.FC = () => {
                 "flex justify-center mt-2 sm:mt-6 transition-[transform,opacity] duration-[--duration]",
               )}>
               <div className="
-                relative rounded-full border-2 border-violet-500 px-8 py-2 text-base font-medium
+                relative rounded-full border-2 border-violet-500 px-4 sm:px-8 py-1 sm:py-2 text-xs sm:text-base font-medium
                 bg-black/20 backdrop-blur-sm
                 before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl
                 animate-glow-slow
@@ -106,11 +108,11 @@ const WorkedWith: React.FC = () => {
                 Worked With
               </div>
             </div>
-
+  
             <h2
               className={clsx(
                 { "translate-y-8 opacity-0": !isActive },
-                "mt-6 text-center font-display text-4xl md:text-5xl font-bold transition-[transform,opacity] duration-[--duration]",
+                "mt-6 text-center font-display text-3xl sm:text-4xl md:text-5xl font-bold transition-[transform,opacity] duration-[--duration]",
                 "bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent",
                 "leading-[1.15] md:leading-[1.3]"
               )}>
@@ -120,12 +122,12 @@ const WorkedWith: React.FC = () => {
             <p
               className={clsx(
                 { "translate-y-8 opacity-0": !isActive },
-                "mt-4 text-center text-gray-400 max-w-2xl mx-auto transition-[transform,opacity] duration-[--duration]",
+                "mt-4 text-center text-gray-400 max-w-2xl mx-auto px-4 transition-[transform,opacity] duration-[--duration]",
               )}>
               Empowering businesses through strategic partnerships and innovative solutions.
             </p>
-
-            <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
+  
+            <div className="mt-8 sm:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 mb-12 sm:mb-20">
               {stats.map((stat: Stat, index: number) => (
                 <motion.div
                   key={index}
@@ -140,7 +142,7 @@ const WorkedWith: React.FC = () => {
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="text-4xl md:text-5xl font-bold text-violet-500 mb-2"
+                    className="text-3xl sm:text-4xl md:text-5xl font-bold text-violet-500 mb-1 sm:mb-2"
                   >
                     <CountUp 
                       end={stat.fullNumber} 
@@ -149,44 +151,60 @@ const WorkedWith: React.FC = () => {
                       enableScrollSpy={true}
                     />
                   </motion.h3>
-                  <p className="text-gray-400">{stat.label}</p>
+                  <p className="text-xs sm:text-base text-gray-400">{stat.label}</p>
                 </motion.div>
               ))}
             </div>
-
-            {/* Brands Grid */}
+  
+            {/* Brands Marquee */}
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="grid grid-cols-2 md:grid-cols-3 gap-8"
+              className="relative w-full overflow-hidden"
             >
-              {brands.map((brand: Brand, index: number) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-black/40 backdrop-blur-sm p-6 rounded-2xl border border-violet-500/20 hover:border-violet-500/40 transition-all duration-300"
-                >
-                  <div className="aspect-video relative flex items-center justify-center">
-                    <img
-                      src={brand.logo}
-                      alt={brand.name}
-                      className="max-w-[120px] max-h-[60px] object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
-                    />
-                  </div>
-                  <p className="text-center mt-4 text-gray-400">{brand.name}</p>
-                </motion.div>
-              ))}
+              <motion.div 
+                className="flex w-max"
+                initial={{ x: 0 }}
+                animate={{ x: "-50%" }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 30,
+                  ease: "linear"
+                }}
+                style={{ 
+                  animationPlayState: isAnimating ? 'running' : 'paused'
+                }}
+                onMouseEnter={() => setIsAnimating(false)}
+                onMouseLeave={() => setIsAnimating(true)}
+              >
+                {[...brands, ...brands].map((brand: Brand, index: number) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: (index % brands.length) * 0.1 }}
+                    whileHover={{ scale: 1.05 }}
+                    className="mx-2 sm:mx-4 w-[16rem] sm:w-[20rem] md:w-[24rem] h-[12rem] sm:h-[15rem] md:h-[18rem] bg-black/40 backdrop-blur-sm p-4 sm:p-6 rounded-2xl border border-violet-500/20 hover:border-violet-500/40 transition-all duration-300 flex flex-col justify-center items-center"
+                  >
+                    <div className="aspect-video relative flex items-center justify-center w-full h-3/4">
+                      <img
+                        src={brand.logo}
+                        alt={brand.name}
+                        className="max-w-[200px] sm:max-w-[240px] md:max-w-[280px] max-h-[100px] sm:max-h-[120px] md:max-h-[140px] object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                      />
+                    </div>
+                    <p className="text-center mt-2 sm:mt-4 text-sm sm:text-xl text-gray-400">{brand.name}</p>
+                  </motion.div>
+                ))}
+              </motion.div>
             </motion.div>
           </>
         )}
       </ScrollReveal>
     </section>
   );
-};
+}
 
 export default WorkedWith;
