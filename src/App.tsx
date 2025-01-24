@@ -6,6 +6,8 @@ import ServicesSection from './components/ServicesSection';
 import WhyChooseUs from './components/WhyChooseUs';
 import WorkedWith from './components/WorkedWith';
 import Portfolio from './components/Portfolio';
+import OurProcess from './components/OurProcess';
+import Testimonials from './components/Testimonials';
 // import OurProcess from './components/OurProcess';
 // import Testimonials from './components/Testimonials';
 // import TeamSection from './components/TeamSection';
@@ -32,11 +34,11 @@ function App() {
             <WhyChooseUs />
             <WorkedWith />
             <Portfolio />
-            {/* <OurProcess />
-            <Testimonials />
-            <TeamSection />
-            <Technologies />
-            <CTASection /> */}
+            <OurProcess />
+            {/* <Testimonials /> */}
+            {/* <TeamSection /> */}
+            {/* <Technologies />
+            <CTASection />  */}
             {/* <FAQSection /> */}
           </main>
           {/* <Footer /> */}
