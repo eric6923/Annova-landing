@@ -23,7 +23,10 @@ export default {
         'slide-up': 'slideUp 0.5s ease-out forwards',
         'drift-1': 'drift1 25s ease-in-out infinite',
         'float': 'float 15s ease-in-out infinite',
-        'glow-slow': 'staticGlow 1s forwards', // Changed to static glow
+        'glow-slow': 'staticGlow 1s forwards',
+        // New marquee animations
+        'marquee-left': 'marqueeLeft 20s linear infinite',
+        'marquee-right': 'marqueeRight 20s linear infinite',
       },
       keyframes: {
         fadeIn: {
@@ -55,6 +58,15 @@ export default {
           '0%, 100%': { 
             boxShadow: '0 0 20px 5px rgba(139, 92, 246, 0.3), inset 0 0 20px 5px rgba(139, 92, 246, 0.3)'
           }
+        },
+        // New marquee keyframes
+        marqueeLeft: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        marqueeRight: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
         },
       },
     },
