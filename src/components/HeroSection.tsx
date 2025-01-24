@@ -78,7 +78,7 @@ const HeroSection = () => {
   const BackgroundContent = useMemo(() => (
     <div className="absolute inset-0 z-20 bg-gradient-to-b from-black/30 to-black/10 pointer-events-none">
       <div className="container mx-auto px-4 h-full flex items-center">
-        <div className="max-w-2xl animate-fade-in">
+        {/* <div className="max-w-2xl animate-fade-in">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Next Generation Robot
           </h1>
@@ -92,7 +92,7 @@ const HeroSection = () => {
           >
             Explore More
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   ), []);
