@@ -4,6 +4,12 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import CountUp from 'react-countup';
 import clsx from "clsx";
+import Img1 from './assets/1.webp'
+import Img2 from './assets/2.webp'
+import Img3 from './assets/3.webp'
+import Img4 from './assets/4.webp'
+import Img5 from './assets/5.webp'
+import Img6 from './assets/6.webp'
 
 interface ScrollRevealProps {
   children: (isActive: boolean) => React.ReactNode;
@@ -66,12 +72,12 @@ const WorkedWith: React.FC = () => {
   ];
 
   const brands: Brand[] = [
-    { name: 'Brand 1', logo: 'https://via.placeholder.com/150' },
-    { name: 'Brand 2', logo: 'https://via.placeholder.com/150' },
-    { name: 'Brand 3', logo: 'https://via.placeholder.com/150' },
-    { name: 'Brand 4', logo: 'https://via.placeholder.com/150' },
-    { name: 'Brand 5', logo: 'https://via.placeholder.com/150' },
-    { name: 'Brand 6', logo: 'https://via.placeholder.com/150' }
+    { name: 'Mobile App Banao', logo: Img1 },
+    { name: 'VamiTech Solutions', logo: Img2 },
+    { name: 'Stancord', logo: Img3 },
+    { name: 'Inno Sewa', logo: Img4 },
+    { name: 'Bihar Innovations', logo: Img5 },
+    { name: 'Totem Consultancy', logo: Img6 }
   ];
 
   return (
@@ -179,24 +185,49 @@ const WorkedWith: React.FC = () => {
                 onMouseLeave={() => setIsAnimating(true)}
               >
                 {[...brands, ...brands].map((brand: Brand, index: number) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: (index % brands.length) * 0.1 }}
-                    whileHover={{ scale: 1.05 }}
-                    className="mx-2 sm:mx-4 w-[16rem] sm:w-[20rem] md:w-[24rem] h-[12rem] sm:h-[15rem] md:h-[18rem] bg-black/40 backdrop-blur-sm p-4 sm:p-6 rounded-2xl border border-violet-500/20 hover:border-violet-500/40 transition-all duration-300 flex flex-col justify-center items-center"
-                  >
-                    <div className="aspect-video relative flex items-center justify-center w-full h-3/4">
-                      <img
-                        src={brand.logo}
-                        alt={brand.name}
-                        className="max-w-[200px] sm:max-w-[240px] md:max-w-[280px] max-h-[100px] sm:max-h-[120px] md:max-h-[140px] object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
-                      />
-                    </div>
-                    <p className="text-center mt-2 sm:mt-4 text-sm sm:text-xl text-gray-400">{brand.name}</p>
-                  </motion.div>
+                 <motion.div
+                 key={index}
+                 initial={{ opacity: 0, scale: 0.8 }}
+                 whileInView={{ opacity: 1, scale: 1 }}
+                 viewport={{ once: true }}
+                 transition={{ duration: 0.5, delay: (index % brands.length) * 0.1 }}
+                 whileHover={{ scale: 1.05 }}
+                 className="mx-2 sm:mx-4 w-[12rem] sm:w-[15rem] md:w-[18rem] 
+                   aspect-square
+                   bg-gradient-to-br from-violet-900/10 to-black/30 
+                   backdrop-blur-sm 
+                   p-3 sm:p-4 
+                   rounded-xl 
+                   border border-violet-500/20 
+                   hover:border-violet-500/40 
+                   transition-all duration-300 
+                   flex flex-col justify-center items-center 
+                   group"
+               >
+                 <div className="w-full flex-grow flex items-center justify-center 
+                   bg-black/20 
+                   rounded-lg 
+                   group-hover:bg-violet-500/10 
+                   transition-all duration-300 
+                   p-3"
+                 >
+                   <img
+                     src={brand.logo}
+                     alt={brand.name}
+                     className="max-w-full max-h-full 
+                       object-contain 
+                       transition-all duration-300 
+                       group-hover:scale-105 
+                       group-hover:brightness-110"
+                   />
+                 </div>
+                 <p className="text-center mt-1 sm:mt-2 text-xs sm:text-sm text-gray-300 
+                   group-hover:text-white 
+                   transition-colors duration-300"
+                 >
+                   {brand.name}
+                 </p>
+               </motion.div>
                 ))}
               </motion.div>
             </motion.div>

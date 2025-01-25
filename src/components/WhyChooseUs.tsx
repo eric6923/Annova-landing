@@ -86,7 +86,7 @@ const ScrollStackCards = () => {
         {content.map((card, index) => {
           const totalCards = content.length;
           const cardProgressStep = 1 / (totalCards - 1);
-          const CARD_SPACING = 40; // Vertical spacing between cards
+          const CARD_SPACING = 60; // Vertical spacing between cards
 
           const y = useTransform(
             scrollYProgress, 
@@ -103,7 +103,9 @@ const ScrollStackCards = () => {
                 y,
                 zIndex: index
               }}
-              className="absolute left-1/2 -translate-x-1/2 w-80 p-6 rounded-xl shadow-lg bg-violet-900 border border-violet-500/20 transition-shadow hover:shadow-xl"
+              className="absolute left-1/2 -translate-x-1/2 w-82 p-6 rounded-xl shadow-lg 
+                         bg-gradient-to-br from-black via-violet-950 to-violet-900 
+                         border border-violet-500/20 transition-shadow hover:shadow-xl"
             >
               <div className="flex flex-col items-center mb-4">
                 <div className="w-16 h-16 mb-4">
