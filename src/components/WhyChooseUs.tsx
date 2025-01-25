@@ -1,198 +1,220 @@
-"use client"
+"use client";
 
-import React from 'react';
-import { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Shield, Rocket, Users, Target } from 'lucide-react';
-import { motion } from 'framer-motion';
-import clsx from "clsx";
+import { useMotionValueEvent, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
+import { ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
-interface ScrollRevealProps {
-  children: (isActive: boolean) => React.ReactNode;
-  offset?: number;
-  className?: string;
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
 }
 
-interface Reason {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}
-
-const ScrollReveal: React.FC<ScrollRevealProps> = ({ children, offset = 200, className }) => {
-  const [isActive, setIsActive] = useState(false);
-  const [hasRevealed, setHasRevealed] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasRevealed) {
-          setIsActive(true);
-          setHasRevealed(true);
-        }
-      },
-      {
-        rootMargin: `0px 0px -${offset}px 0px`,
-      }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, [offset, hasRevealed]);
-
-  return (
-    <div ref={ref} className={className}>
-      {children(isActive)}
-    </div>
-  );
-};
-
-const reasons: Reason[] = [
+const content = [
   {
-    icon: <Shield size={32} />,
-    title: 'Proven Expertise',
-    description: 'Over a decade of experience delivering cutting-edge digital solutions across industries.'
+    title: "Proven Expertise",
+    description: "Over a decade of experience delivering cutting-edge digital solutions across industries.",
+    content: (
+      <div className="h-full w-full bg-gradient-to-br from-violet-600/20 to-violet-800/20 flex items-center justify-center p-8">
+        <div className="flex flex-col items-center space-y-4">
+          <Shield className="w-24 h-24 text-violet-400" />
+          <p className="text-xl text-center text-violet-200 font-medium">
+            Trusted by industry leaders for over a decade
+          </p>
+        </div>
+      </div>
+    ),
   },
   {
-    icon: <Rocket size={32} />,
-    title: 'Innovation First',
-    description: 'We stay ahead of technological trends to give your business a competitive edge.'
+    title: "Innovation First",
+    description: "We stay ahead of technological trends to give your business a competitive edge.",
+    content: (
+      <div className="h-full w-full bg-gradient-to-br from-violet-600/20 to-violet-800/20 flex items-center justify-center p-8">
+        <div className="flex flex-col items-center space-y-4">
+          <Rocket className="w-24 h-24 text-violet-400" />
+          <p className="text-xl text-center text-violet-200 font-medium">
+            Cutting-edge solutions for tomorrow's challenges
+          </p>
+        </div>
+      </div>
+    ),
   },
   {
-    icon: <Users size={32} />,
-    title: 'Client-Centric Approach',
-    description: 'Your success is our priority. We work closely with you to understand and achieve your goals.'
+    title: "Client-Centric Approach",
+    description: "Your success is our priority. We work closely with you to understand and achieve your goals.",
+    content: (
+      <div className="h-full w-full bg-gradient-to-br from-violet-600/20 to-violet-800/20 flex items-center justify-center p-8">
+        <div className="flex flex-col items-center space-y-4">
+          <Users className="w-24 h-24 text-violet-400" />
+          <p className="text-xl text-center text-violet-200 font-medium">
+            Dedicated to your success story
+          </p>
+        </div>
+      </div>
+    ),
   },
   {
-    icon: <Target size={32} />,
-    title: 'Results Driven',
-    description: 'We focus on delivering measurable results that drive your business forward.'
-  }
+    title: "Results Driven",
+    description: "We focus on delivering measurable results that drive your business forward.",
+    content: (
+      <div className="h-full w-full bg-gradient-to-br from-violet-600/20 to-violet-800/20 flex items-center justify-center p-8">
+        <div className="flex flex-col items-center space-y-4">
+          <Target className="w-24 h-24 text-violet-400" />
+          <p className="text-xl text-center text-violet-200 font-medium">
+            Measurable impact, tangible growth
+          </p>
+        </div>
+      </div>
+    ),
+  },
 ];
 
 export default function WhyChooseUsSection() {
+  const [activeCard, setActiveCard] = React.useState(0);
+  const ref = useRef<any>(null);
+  const { scrollYProgress } = useScroll({
+    container: ref,
+    offset: ["start start", "end start"],
+  });
+  const cardLength = content.length;
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const cardsBreakpoints = content.map((_, index) => index / (cardLength +2));
+    const closestBreakpointIndex = cardsBreakpoints.reduce(
+      (acc, breakpoint, index) => {
+        const distance = Math.abs(latest - breakpoint);
+        if (distance < Math.abs(latest - cardsBreakpoints[acc])) {
+          return index;
+        }
+        return acc;
+      },
+      0
+    );
+    setActiveCard(closestBreakpointIndex);
+  });
+
+  const backgroundColors = [
+    "var(--slate-900)",
+    "var(--black)",
+    "var(--neutral-900)",
+  ];
+  const linearGradients = [
+    "linear-gradient(to bottom right, var(--cyan-500), var(--emerald-500))",
+    "linear-gradient(to bottom right, var(--pink-500), var(--indigo-500))",
+    "linear-gradient(to bottom right, var(--orange-500), var(--yellow-500))",
+  ];
+
+  const [backgroundGradient, setBackgroundGradient] = useState(linearGradients[0]);
+
+  useEffect(() => {
+    setBackgroundGradient(linearGradients[activeCard % linearGradients.length]);
+  }, [activeCard]);
+
   return (
-    <section className="relative min-h-screen w-full px-8 py-2 overflow-hidden bg-black">
+    <section className="relative min-h-screen w-full bg-black">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(124,58,237,0.03),rgba(0,0,0,0))]"></div>
-        
         <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black to-transparent"></div>
-        
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-violet-600/5 rounded-full blur-[140px] animate-float"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-500/4 rounded-full blur-[120px] animate-drift-1"></div>
-        
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDEyNCw1OCwyMzcsMC4wMykiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
-        
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent"></div>
       </div>
 
       {/* Content */}
-      <ScrollReveal offset={200} className="relative z-10 mx-auto max-w-7xl [--duration:800ms]">
-        {(isActive) => (
-          <>
-            <div
-              className={clsx(
-                { "translate-y-8 opacity-0": !isActive },
-                "flex justify-center mt-2 sm:mt-6 transition-[transform,opacity] duration-[--duration]",
-              )}>
-              <div className="
-                relative rounded-full border-2 border-violet-500 px-8 py-2 text-base font-medium
-                bg-black/20 backdrop-blur-sm
-                before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl
-                animate-glow-slow
-              ">
-                Why Choose Us
+      <div className="relative z-10 mx-auto max-w-[90rem] pt-20 pb-10 px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-center mb-8 md:mb-16">
+          <div className="relative rounded-full border-2 border-violet-500 px-6 sm:px-8 py-2 text-sm sm:text-base font-medium bg-black/20 backdrop-blur-sm before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl animate-glow-slow">
+            Why Choose Us
+          </div>
+        </div>
+
+        <h2 className="text-center font-display text-3xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent mb-10 md:mb-20 px-4">
+          Your Success, Our Priority
+        </h2>
+
+        {/* Mobile View (< 1024px) */}
+        <div className="lg:hidden space-y-8 px-4">
+          {content.map((item, index) => (
+            <motion.div
+              key={item.title + index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="bg-gradient-to-br from-violet-900/10 to-black rounded-xl border border-violet-500/20 overflow-hidden"
+            >
+              <div className="p-6">
+                <h3 className="text-2xl font-bold text-slate-100 mb-4">{item.title}</h3>
+                <p className="text-slate-300 text-lg mb-6">{item.description}</p>
               </div>
-            </div>
+              <div className="h-48 w-full" style={{ background: linearGradients[index % linearGradients.length] }}>
+                {item.content}
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
-            <h2
-              className={clsx(
-                { "translate-y-8 opacity-0": !isActive },
-                "mt-6 text-center font-display text-4xl md:text-5xl font-bold transition-[transform,opacity] duration-[--duration]",
-                "bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent",
-                "leading-[1.15] md:leading-[1.3]"
-              )}>
-              Your Success, Our Priority
-            </h2>
-            
-            <p
-              className={clsx(
-                { "translate-y-8 opacity-0": !isActive },
-                "mt-4 text-center text-gray-400 max-w-2xl mx-auto transition-[transform,opacity] duration-[--duration]",
-              )}>
-              We bring together expertise, innovation, and dedication to deliver exceptional results.
-            </p>
-
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
-              {reasons.map((reason, index) => (
-                <ScrollReveal key={index} offset={100}>
-                  {(isCardActive) => (
-                    <>
-                      {/* Mobile View */}
-                      <motion.div
-                        className="block lg:hidden relative group"
-                        initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                      >
-                        <div className={clsx(
-                          "relative bg-gradient-to-br from-violet-900/10 to-black p-8 rounded-2xl",
-                          "border border-violet-500/20 hover:border-violet-500/40",
-                          "transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/10",
-                          "group hover:-translate-y-1 backdrop-blur-sm",
-                          "before:absolute before:inset-0 before:-z-10 before:rounded-2xl before:bg-violet-500/5 before:blur-xl"
-                        )}>
-                          <div className="text-violet-500 mb-4 transform group-hover:scale-110 transition-transform duration-300">
-                            {reason.icon}
-                          </div>
-                          <h3 className="text-2xl font-semibold mb-3 group-hover:text-violet-400 transition-colors">
-                            {reason.title}
-                          </h3>
-                          <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
-                            {reason.description}
-                          </p>
-                        </div>
-                      </motion.div>
-
-                      {/* Desktop View */}
-                      <div 
-                        className={clsx(
-                          "hidden lg:block relative group",
-                          { "translate-y-8 opacity-0": !isCardActive },
-                          "transition-all duration-[800ms]"
-                        )}
-                      >
-                        <div className={clsx(
-                          "relative bg-gradient-to-br from-violet-900/10 to-black p-8 rounded-2xl",
-                          "border border-violet-500/20 hover:border-violet-500/40",
-                          "transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/10",
-                          "group hover:-translate-y-1 backdrop-blur-sm",
-                          "before:absolute before:inset-0 before:-z-10 before:rounded-2xl before:bg-violet-500/5 before:blur-xl"
-                        )}>
-                          <div className="text-violet-500 mb-4 transform group-hover:scale-110 transition-transform duration-300">
-                            {reason.icon}
-                          </div>
-                          <h3 className="text-2xl font-semibold mb-3 group-hover:text-violet-400 transition-colors">
-                            {reason.title}
-                          </h3>
-                          <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
-                            {reason.description}
-                          </p>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </ScrollReveal>
+        {/* Desktop View (≥ 1024px) */}
+        {/* Desktop View (≥ 1024px) */}
+        <motion.div
+          animate={{
+            backgroundColor: backgroundColors[activeCard % backgroundColors.length],
+          }}
+          className="hidden lg:flex h-[50rem] overflow-y-auto justify-center relative space-x-10 rounded-md p-10 scrollbar-hide"
+          ref={ref}
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+          }}
+        >
+          <div className="relative flex items-start px-4">
+            <div className="max-w-3xl">
+              {content.map((item, index) => (
+                <div 
+                  key={item.title + index} 
+                  className="my-32"
+                  style={{ 
+                    height: index === content.length - 1 ? 'calc(100vh - 20rem)' : 'auto' 
+                  }}
+                >
+                  <motion.h2
+                    initial={{
+                      opacity: 0,
+                    }}
+                    animate={{
+                      opacity: activeCard === index ? 1 : 0.3,
+                    }}
+                    className="text-4xl font-bold text-slate-100"
+                  >
+                    {item.title}
+                  </motion.h2>
+                  <motion.p
+                    initial={{
+                      opacity: 0,
+                    }}
+                    animate={{
+                      opacity: activeCard === index ? 1 : 0.3,
+                    }}
+                    className="text-xl text-slate-300 max-w-xl mt-6"
+                  >
+                    {item.description}
+                  </motion.p>
+                </div>
               ))}
+              <div className="h-40" />
             </div>
-          </>
-        )}
-      </ScrollReveal>
+          </div>
+          <div
+            style={{ background: backgroundGradient }}
+            className={cn(
+              "h-96 w-[28rem] rounded-xl bg-white sticky top-10 overflow-hidden",
+              "bg-black border border-violet-500/20 shadow-lg shadow-violet-500/10"
+            )}
+          >
+            {content[activeCard].content ?? null}
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 }

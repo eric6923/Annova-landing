@@ -112,7 +112,7 @@ const HeroSection = () => {
               <span className="relative group">
                 <span className="bg-gradient-to-r from-violet-300 via-violet-400 to-violet-200 text-transparent bg-clip-text"> Digital Reality</span>
                 
-                {/* Doodle Art Circle */}
+                {/* Enhanced Doodle Art Circle */}
                 <svg 
                   className="absolute -bottom-2 sm:-bottom-3 md:-bottom-4 left-1/2 transform -translate-x-1/2 w-full max-w-[120%] -z-10 opacity-60"
                   viewBox="0 0 500 50"
@@ -121,7 +121,7 @@ const HeroSection = () => {
                   <path 
                     d="M20,30 Q250,50 480,30" 
                     fill="none" 
-                    stroke="rgba(124,58,237,0.5)" 
+                    stroke="rgba(124,58,237,0.6)" 
                     strokeWidth="3" 
                     strokeLinecap="round"
                   />
@@ -132,7 +132,7 @@ const HeroSection = () => {
 
           <motion.p 
             variants={itemVariants}
-            className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto px-4"
+            className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto px-4 antialiased"
           >
             We craft exceptional digital experiences that elevate brands and drive success through innovative solutions and cutting-edge technology.
           </motion.p>
@@ -142,13 +142,13 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 md:pt-8"
           >
             <motion.button 
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.95 }}
-  className="group w-3/4 sm:w-auto px-6 md:px-8 py-3 md:py-4 text-base font-bold bg-violet-600 hover:bg-violet-700 text-white rounded-xl flex items-center justify-center gap-2 transition-all"
->
-  <span>Get Started</span>
-  <ArrowRight size={20} />
-</motion.button>
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="group w-3/4 sm:w-auto px-6 md:px-8 py-3 md:py-4 text-base font-bold bg-violet-600 hover:bg-violet-700 text-white rounded-xl flex items-center justify-center gap-2 transition-all"
+            >
+              <span>Get Started</span>
+              <ArrowRight size={20} />
+            </motion.button>
             
             <motion.button 
               whileHover={{ scale: 1.05 }}
