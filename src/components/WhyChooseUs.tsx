@@ -134,27 +134,27 @@ export default function WhyChooseUsSection() {
         </h2>
 
         {/* Mobile View (< 1024px) */}
-        <div className="lg:hidden space-y-8 px-4">
-          {content.map((item, index) => (
-            <motion.div
-              key={item.title + index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gradient-to-br from-violet-900/10 to-black rounded-xl border border-violet-500/20 overflow-hidden"
-            >
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-slate-100 mb-4">{item.title}</h3>
-                <p className="text-slate-300 text-lg mb-6">{item.description}</p>
-              </div>
-              <div className="h-48 w-full" style={{ background: linearGradients[index % linearGradients.length] }}>
-                {item.content}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        
+<div className="lg:hidden space-y-8 ">
+  {content.map((item, index) => (
+    <div
+      key={item.title + index}
+      className="bg-gradient-to-br from-violet-900/10 to-black rounded-xl border border-violet-500/20 overflow-hidden"
+    >
+      <div
+        className="h-48 w-full"
+        style={{ background: linearGradients[index % linearGradients.length] }}
+      >
+        {item.content}
+      </div>
+      <div className="p-6 backdrop-blur-sm bg-black/40">
+        <h3 className="text-2xl font-bold text-slate-100 mb-4">{item.title}</h3>
+        <p className="text-slate-300 text-lg mb-0">{item.description}</p>
+      </div>
+    </div>
+  ))}
+</div>
 
-        {/* Desktop View (≥ 1024px) */}
         {/* Desktop View (≥ 1024px) */}
         <motion.div
           animate={{
