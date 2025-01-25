@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Shield, Rocket, Users, Target } from 'lucide-react';
-import { useMotionValueEvent, useScroll } from "framer-motion";
+import { useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { motion } from "framer-motion";
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -70,6 +70,59 @@ const content = [
   },
 ];
 
+const ScrollStackCards = () => {
+  const scrollRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    container: scrollRef,
+    offset: ["start start", "end end"]
+  });
+
+  return (
+    <div 
+      ref={scrollRef} 
+      className="h-screen overflow-y-scroll relative"
+    >
+      <div className="h-[calc(200vh+200px)] relative">
+        {content.map((card, index) => {
+          const totalCards = content.length;
+          const cardProgressStep = 1 / (totalCards - 1);
+          const CARD_SPACING = 40; // Vertical spacing between cards
+
+          const y = useTransform(
+            scrollYProgress, 
+            [0, cardProgressStep * (totalCards - 1)], 
+            [index * CARD_SPACING, -((totalCards - 1 - index) * CARD_SPACING)]
+          );
+
+          return (
+            <motion.div
+              key={index}
+              style={{ 
+                position: 'sticky', 
+                top: 0, 
+                y,
+                zIndex: index
+              }}
+              className="absolute left-1/2 -translate-x-1/2 w-80 p-6 rounded-xl shadow-lg bg-violet-900 border border-violet-500/20 transition-shadow hover:shadow-xl"
+            >
+              <div className="flex flex-col items-center mb-4">
+                <div className="w-16 h-16 mb-4">
+                  {index === 0 && <Shield className="w-full h-full text-violet-400" />}
+                  {index === 1 && <Rocket className="w-full h-full text-violet-400" />}
+                  {index === 2 && <Users className="w-full h-full text-violet-400" />}
+                  {index === 3 && <Target className="w-full h-full text-violet-400" />}
+                </div>
+                <h2 className="text-xl font-bold text-white mb-2">{card.title}</h2>
+                <p className="text-gray-200 text-center">{card.description}</p>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
 export default function WhyChooseUsSection() {
   const [activeCard, setActiveCard] = React.useState(0);
   const ref = useRef<any>(null);
@@ -80,7 +133,7 @@ export default function WhyChooseUsSection() {
   const cardLength = content.length;
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const cardsBreakpoints = content.map((_, index) => index / (cardLength +2));
+    const cardsBreakpoints = content.map((_, index) => index / (cardLength + 2));
     const closestBreakpointIndex = cardsBreakpoints.reduce(
       (acc, breakpoint, index) => {
         const distance = Math.abs(latest - breakpoint);
@@ -134,26 +187,9 @@ export default function WhyChooseUsSection() {
         </h2>
 
         {/* Mobile View (< 1024px) */}
-        
-<div className="lg:hidden space-y-8 ">
-  {content.map((item, index) => (
-    <div
-      key={item.title + index}
-      className="bg-gradient-to-br from-violet-900/10 to-black rounded-xl border border-violet-500/20 overflow-hidden"
-    >
-      <div
-        className="h-48 w-full"
-        style={{ background: linearGradients[index % linearGradients.length] }}
-      >
-        {item.content}
-      </div>
-      <div className="p-6 backdrop-blur-sm bg-black/40">
-        <h3 className="text-2xl font-bold text-slate-100 mb-4">{item.title}</h3>
-        <p className="text-slate-300 text-lg mb-0">{item.description}</p>
-      </div>
-    </div>
-  ))}
-</div>
+        <div className="lg:hidden">
+          <ScrollStackCards />
+        </div>
 
         {/* Desktop View (≥ 1024px) */}
         <motion.div
