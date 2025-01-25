@@ -37,14 +37,14 @@ const ProcessSection: React.FC = () => {
             ensuring every detail meets our high standards.
           </p>
           <div className="space-y-6">
-            <div className="relative h-64 rounded-xl overflow-hidden">
+            {/* <div className="relative h-64 rounded-xl overflow-hidden">
               <img
                 src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
                 alt="Development Process"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            </div>
+            </div> */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="bg-violet-500/5 rounded-lg p-6 backdrop-blur-sm border border-violet-500/10 transition-all duration-300 hover:border-violet-500/30">
                 <h4 className="text-white text-lg font-semibold mb-3">UI Development</h4>
@@ -67,25 +67,30 @@ const ProcessSection: React.FC = () => {
             We ensure a smooth deployment and provide comprehensive support to guarantee your success
             in the digital landscape.
           </p>
-          <div className="bg-gradient-to-br from-violet-500/10 to-purple-500/10 rounded-lg p-8 backdrop-blur-sm border border-violet-500/10">
-            <Rocket className="w-10 h-10 text-violet-500 mb-6" />
-            <h4 className="text-white text-xl font-semibold mb-6">Ready for Takeoff</h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                'Performance optimization',
-                'Security implementation',
-                'Production deployment',
-                'Post-launch monitoring',
-                '24/7 Support access',
-                'Regular updates'
-              ].map((item, index) => (
-                <div key={index} className="flex items-center gap-3 text-gray-400 text-sm">
-                  <CheckCircle className="w-5 h-5 text-violet-500 flex-shrink-0" />
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <div className="bg-violet-500/5 rounded-lg p-6 backdrop-blur-sm border border-violet-500/10 transition-all duration-300 hover:border-violet-500/30">
+  <Rocket className="w-8 h-8 text-violet-500 mb-4" />
+  <h4 className="text-white text-lg font-semibold mb-4">Ready for Takeoff</h4>
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    {[
+      'Performance optimization',
+      'Security implementation',
+      'Production deployment',
+      'Post-launch monitoring',
+      '24/7 Support access',
+      'Constant updates'
+    ].map((item, index) => (
+      <div 
+        key={index} 
+        className="flex items-center gap-3 text-gray-400 text-sm"
+      >
+        <CheckCircle 
+          className="w-5 h-5 text-violet-500 flex-shrink-0" 
+        />
+        <span>{item}</span>
+      </div>
+    ))}
+  </div>
+</div>
         </div>
       ),
     },

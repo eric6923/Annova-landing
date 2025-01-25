@@ -88,6 +88,7 @@ export const Timeline: React.FC<TimelineProps> = ({ data }) => {
               </div>
 
               {/* Content */}
+              {/* Content */}
               <div className="relative">
                 <motion.h3
                   initial={{ opacity: 0, x: -20 }}
@@ -106,7 +107,6 @@ export const Timeline: React.FC<TimelineProps> = ({ data }) => {
                   {item.content}
                 </motion.div>
               </div>
-
               {/* Connector line for mobile */}
               {index < data.length - 1 && (
                 <div className="absolute left-5 top-12 bottom-0 w-[2px] md:hidden">
