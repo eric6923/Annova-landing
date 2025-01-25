@@ -1,127 +1,158 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const testimonials = [
+interface Testimonial {
+  id: number;
+  name: string;
+  role: string;
+  company: string;
+  image: string;
+  quote: string;
+}
+
+const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: 'John Smith',
-    role: 'CEO, Tech Innovators',
-    content: 'Working with Annova has been transformative for our business. Their expertise and dedication to quality are unmatched.',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&auto=format&fit=crop&q=60'
+    name: "Sonarike Mahajan",
+    role: "Co-founder",
+    company: "@Apollo Cranes",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+    quote: "The level of collaboration made the entire process smooth and enjoyable."
   },
   {
     id: 2,
-    name: 'Sarah Johnson',
-    role: 'Marketing Director, Global Solutions',
-    content: 'The team at Annova delivered beyond our expectations. Their attention to detail and innovative solutions have helped us stay ahead of the competition.',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop&q=60'
+    name: "Sarah Johnson",
+    role: "Project Manager",
+    company: "@BuildTech",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80",
+    quote: "Their innovative approach transformed our construction workflow completely."
   },
   {
     id: 3,
-    name: 'Michael Chen',
-    role: 'Founder, Digital Ventures',
-    content: 'Exceptional service and outstanding results. Annova has been instrumental in our digital transformation journey.',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=60'
+    name: "Michael Chen",
+    role: "Site Director",
+    company: "@ConstructPro",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+    quote: "The attention to detail and commitment to excellence was outstanding."
   }
 ];
 
-const Testimonials = () => {
+const Testimonials: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  const next = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
+    );
   };
 
-  const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  const prev = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
+    );
   };
 
   return (
-    <section id="testimonials" className="py-20 relative overflow-hidden">
-      <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold mb-4">Client Testimonials</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Hear what our clients have to say about working with us.
-          </p>
-        </motion.div>
-
-        <div className="relative max-w-4xl mx-auto">
-          {/* Navigation Buttons */}
-          <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between pointer-events-none z-10">
-            <button
-              onClick={prevTestimonial}
-              className="p-2 rounded-full bg-violet-600/20 text-violet-400 hover:bg-violet-600/40 transition-colors pointer-events-auto"
-            >
-              <ChevronLeft size={24} />
-            </button>
-            <button
-              onClick={nextTestimonial}
-              className="p-2 rounded-full bg-violet-600/20 text-violet-400 hover:bg-violet-600/40 transition-colors pointer-events-auto"
-            >
-              <ChevronRight size={24} />
-            </button>
+    <div className="min-h-screen bg-black flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 lg:py-0">
+      <div className="max-w-6xl w-full mx-auto">
+        {/* Testimonial Header */}
+        <div className="text-center mb-8 lg:mb-12">
+          <div className="inline-flex px-4 py-2 rounded-full bg-[#2A2A2A] mb-4">
+            <span className="text-white/90 text-sm font-medium">
+              Testimonials
+            </span>
           </div>
+          
+          <h2 className="text-4xl lg:text-6xl font-bold leading-tight">
+            <div className="bg-gradient-to-r from-violet-400 to-violet-600 text-transparent bg-clip-text inline-block">
+              Real Stories,
+            </div>
+            <div className="text-white">
+              Real Voices
+            </div>
+          </h2>
+        </div>
 
-          {/* Testimonials Slider */}
-          <div className="relative h-[400px]">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.5 }}
-                className="absolute inset-0"
-              >
-                <div className="bg-black/40 backdrop-blur-sm p-8 md:p-12 rounded-2xl border border-violet-500/20">
-                  <Quote className="text-violet-500 mb-6" size={48} />
-                  <p className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed">
-                    {testimonials[currentIndex].content}
-                  </p>
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={testimonials[currentIndex].image}
-                      alt={testimonials[currentIndex].name}
-                      className="w-16 h-16 rounded-full object-cover"
-                    />
-                    <div>
-                      <h4 className="text-lg font-semibold">
-                        {testimonials[currentIndex].name}
-                      </h4>
-                      <p className="text-gray-400">
-                        {testimonials[currentIndex].role}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-8">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === currentIndex
-                    ? 'bg-violet-500 w-4'
-                    : 'bg-violet-500/20'
-                }`}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Image Section - Now first on mobile */}
+          <div className="order-1 flex flex-col items-center">
+            {/* Image Container */}
+            <div className="relative w-full max-w-[280px] lg:max-w-sm aspect-[3/4] rounded-3xl overflow-hidden mb-6">
+              <img
+                src={testimonials[currentIndex].image}
+                alt={testimonials[currentIndex].name}
+                className="absolute inset-0 w-full h-full object-cover"
               />
-            ))}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/20" />
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="flex gap-4 mb-6 lg:hidden">
+              <button
+                onClick={prev}
+                className="w-10 h-10 rounded-full border border-violet-500/30 flex items-center justify-center text-violet-500 hover:text-violet-400 hover:border-violet-400 transition-colors"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                onClick={next}
+                className="w-10 h-10 rounded-full border border-violet-500/30 flex items-center justify-center text-violet-500 hover:text-violet-400 hover:border-violet-400 transition-colors"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+
+            {/* Name and Designation - Overlaid on image for desktop, visible on mobile */}
+            <div className=" text-center lg:hidden mb-6">
+              <h3 className="text-xl font-semibold text-white mb-1">
+                {testimonials[currentIndex].name}
+              </h3>
+              <p className="text-sm text-white/60">
+                {testimonials[currentIndex].role} {testimonials[currentIndex].company}
+              </p>
+            </div>
+          </div>
+
+          {/* Quote and Desktop Navigation */}
+          <div className=" order-2 flex flex-col justify-center">
+            {/* Quote */}
+            <blockquote className="hidden lg:block text-2xl lg:text-4xl font-light text-white/90 leading-tight mb-8">
+              "{testimonials[currentIndex].quote}"
+            </blockquote>
+
+            {/* Name and Designation - Hidden on mobile, visible on desktop */}
+            <div className="hidden lg:block mb-6">
+              <h3 className="text-2xl font-semibold text-white mb-1">
+                {testimonials[currentIndex].name}
+              </h3>
+              <p className="text-base text-white/60">
+                {testimonials[currentIndex].role} {testimonials[currentIndex].company}
+              </p>
+            </div>
+
+            {/* Desktop Navigation Buttons */}
+            <div className="hidden lg:flex gap-4">
+              <button
+                onClick={prev}
+                className="w-12 h-12 rounded-full border border-violet-500/30 flex items-center justify-center text-violet-500 hover:text-violet-400 hover:border-violet-400 transition-colors"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                onClick={next}
+                className="w-12 h-12 rounded-full border border-violet-500/30 flex items-center justify-center text-violet-500 hover:text-violet-400 hover:border-violet-400 transition-colors"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

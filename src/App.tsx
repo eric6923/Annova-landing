@@ -37,7 +37,7 @@ function App() {
             <Portfolio />
             <OurProcess />
             {/* <TechStackMarquee/> */}
-            {/* <Testimonials /> */}
+            <Testimonials />
             {/* <TeamSection /> */}
             {/* <Technologies />
             <CTASection />  */}
