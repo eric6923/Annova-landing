@@ -71,56 +71,50 @@ const content = [
 ];
 
 const ScrollStackCards = () => {
-  const scrollRef = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    container: scrollRef,
+    target: ref,
     offset: ["start start", "end end"]
   });
 
   return (
-    <div 
-      ref={scrollRef} 
-      className="h-screen overflow-y-scroll relative"
-    >
-      <div className="h-[calc(200vh+200px)] relative">
-        {content.map((card, index) => {
-          const totalCards = content.length;
-          const cardProgressStep = 1 / (totalCards - 1);
-          const CARD_SPACING = 60; // Vertical spacing between cards
+    <div ref={ref} className="lg:hidden h-[calc(200vh+200px)] relative">
+      {content.map((card, index) => {
+        const totalCards = content.length;
+        const CARD_SPACING = 60;
 
-          const y = useTransform(
-            scrollYProgress, 
-            [0, cardProgressStep * (totalCards - 1)], 
-            [index * CARD_SPACING, -((totalCards - 1 - index) * CARD_SPACING)]
-          );
+        const y = useTransform(
+          scrollYProgress, 
+          [0,1], 
+          [index * CARD_SPACING, -((totalCards - 1 - index) * CARD_SPACING)]
+        );
 
-          return (
-            <motion.div
-              key={index}
-              style={{ 
-                position: 'sticky', 
-                top: 0, 
-                y,
-                zIndex: index
-              }}
-              className="absolute left-1/2 -translate-x-1/2 w-82 p-6 rounded-xl shadow-lg 
-                         bg-gradient-to-br from-black via-violet-950 to-violet-900 
-                         border border-violet-500/20 transition-shadow hover:shadow-xl"
-            >
-              <div className="flex flex-col items-center mb-4">
-                <div className="w-16 h-16 mb-4">
-                  {index === 0 && <Shield className="w-full h-full text-violet-400" />}
-                  {index === 1 && <Rocket className="w-full h-full text-violet-400" />}
-                  {index === 2 && <Users className="w-full h-full text-violet-400" />}
-                  {index === 3 && <Target className="w-full h-full text-violet-400" />}
-                </div>
-                <h2 className="text-xl font-bold text-white mb-2">{card.title}</h2>
-                <p className="text-gray-200 text-center">{card.description}</p>
+        return (
+          <motion.div
+            key={index}
+            style={{ 
+              position: 'sticky', 
+              top: 0, 
+              y,
+              zIndex: index
+            }}
+            className="absolute left-1/2 -translate-x-1/2 w-[90%] p-4 mr-4 rounded-xl shadow-lg 
+                       bg-gradient-to-br from-black via-violet-950 to-violet-900 
+                       border border-violet-500/20 transition-shadow hover:shadow-xl"
+          >
+            <div className="flex flex-col items-center mb-4">
+              <div className="w-16 h-16 mb-4">
+                {index === 0 && <Shield className="w-full h-full text-violet-400" />}
+                {index === 1 && <Rocket className="w-full h-full text-violet-400" />}
+                {index === 2 && <Users className="w-full h-full text-violet-400" />}
+                {index === 3 && <Target className="w-full h-full text-violet-400" />}
               </div>
-            </motion.div>
-          );
-        })}
-      </div>
+              <h2 className="text-xl font-bold text-white mb-2">{card.title}</h2>
+              <p className="text-gray-200 text-center">{card.description}</p>
+            </div>
+          </motion.div>
+        );
+      })}
     </div>
   );
 };

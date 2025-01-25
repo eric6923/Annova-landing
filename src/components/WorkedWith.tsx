@@ -163,74 +163,79 @@ const WorkedWith: React.FC = () => {
             </div>
   
             {/* Brands Marquee */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="relative w-full overflow-hidden"
-            >
-              <motion.div 
-                className="flex w-max"
-                initial={{ x: 0 }}
-                animate={{ x: "-50%" }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 30,
-                  ease: "linear"
-                }}
-                style={{ 
-                  animationPlayState: isAnimating ? 'running' : 'paused'
-                }}
-                onMouseEnter={() => setIsAnimating(false)}
-                onMouseLeave={() => setIsAnimating(true)}
-              >
-                {[...brands, ...brands].map((brand: Brand, index: number) => (
-                 <motion.div
-                 key={index}
-                 initial={{ opacity: 0, scale: 0.8 }}
-                 whileInView={{ opacity: 1, scale: 1 }}
-                 viewport={{ once: true }}
-                 transition={{ duration: 0.5, delay: (index % brands.length) * 0.1 }}
-                 whileHover={{ scale: 1.05 }}
-                 className="mx-2 sm:mx-4 w-[12rem] sm:w-[15rem] md:w-[18rem] 
-                   aspect-square
-                   bg-gradient-to-br from-violet-900/10 to-black/30 
-                   backdrop-blur-sm 
-                   p-3 sm:p-4 
-                   rounded-xl 
-                   border border-violet-500/20 
-                   hover:border-violet-500/40 
-                   transition-all duration-300 
-                   flex flex-col justify-center items-center 
-                   group"
-               >
-                 <div className="w-full flex-grow flex items-center justify-center 
-                   bg-black/20 
-                   rounded-lg 
-                   group-hover:bg-violet-500/10 
-                   transition-all duration-300 
-                   p-3"
-                 >
-                   <img
-                     src={brand.logo}
-                     alt={brand.name}
-                     className="max-w-full max-h-full 
-                       object-contain 
-                       transition-all duration-300 
-                       group-hover:scale-105 
-                       group-hover:brightness-110"
-                   />
-                 </div>
-                 <p className="text-center mt-1 sm:mt-2 text-xs sm:text-sm text-gray-300 
-                   group-hover:text-white 
-                   transition-colors duration-300"
-                 >
-                   {brand.name}
-                 </p>
-               </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
+            {/* Brands Marquee */}
+<motion.div
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  viewport={{ once: true }}
+  className="relative w-full overflow-hidden"
+>
+  <motion.div 
+    className="flex w-max"
+    initial={{ x: 0 }}
+    animate={{ x: "-50%" }}
+    transition={{
+      repeat: Infinity,
+      duration: 30,
+      ease: "linear"
+    }}
+    style={{ 
+      animationPlayState: isAnimating ? 'running' : 'paused'
+    }}
+    onMouseEnter={() => setIsAnimating(false)}
+    onMouseLeave={() => setIsAnimating(true)}
+  >
+    {[...brands, ...brands].map((brand: Brand, index: number) => (
+     <motion.div
+     key={index}
+     initial={{ opacity: 0, scale: 0.8 }}
+     whileInView={{ opacity: 1, scale: 1 }}
+     viewport={{ once: true }}
+     transition={{ duration: 0.5, delay: (index % brands.length) * 0.1 }}
+     whileHover={{ scale: 1.05 }}
+     className="mx-1 sm:mx-2 w-[10rem] sm:w-[12rem] md:w-[15rem] 
+       aspect-square
+       bg-gradient-to-br from-violet-900/10 to-black/30 
+       backdrop-blur-sm 
+       p-2 sm:p-3 
+       rounded-xl 
+       border border-violet-500/20 
+       hover:border-violet-500/40 
+       transition-all duration-300 
+       flex flex-col justify-center items-center 
+       group"
+   >
+     <div className="w-full flex-grow flex items-center justify-center 
+       bg-black/20 
+       rounded-lg 
+       group-hover:bg-violet-500/10 
+       transition-all duration-300 
+       p-2"
+     >
+       <img
+         src={brand.logo}
+         alt={brand.name}
+         className="max-w-[80%] max-h-[80%] 
+           object-contain 
+           transition-all duration-300 
+           group-hover:scale-105 
+           group-hover:brightness-110"
+       />
+     </div>
+     <p className="text-center mt-1 text-xs sm:text-sm text-gray-300 
+       group-hover:text-white 
+       transition-colors duration-300"
+     >
+       {brand.name}
+     </p>
+   </motion.div>
+    ))}
+  </motion.div>
+  
+  {/* Vignette effect */}
+  <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-black to-transparent z-10"></div>
+  <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-black to-transparent z-10"></div>
+</motion.div>
           </>
         )}
       </ScrollReveal>
