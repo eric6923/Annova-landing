@@ -93,7 +93,7 @@ const ScrollStackCards = () => {
       {/* Cards container */}
       <div className="h-[300vh] relative mr-4">
         {content.map((card, index) => {
-          const CARD_OFFSET = 200;
+          const CARD_OFFSET = 160;
           const INITIAL_Y = 20;
           const SEGMENT_SIZE = 0.2;
           const START_POINT = index * SEGMENT_SIZE;
@@ -123,7 +123,7 @@ const ScrollStackCards = () => {
               }}
               className="absolute left-1/2 -translate-x-1/2 w-[90%] p-6 rounded-xl shadow-lg 
                          bg-gradient-to-br from-black via-violet-950 to-violet-900 
-                         border border-violet-500/20 transition-shadow hover:shadow-xl"
+                         border border-violet-500/20 transition-shadow hover:shadow-xl mr-1.5"
             >
               <div className="flex flex-col items-center">
                 <div className="w-16 h-16 mb-4">

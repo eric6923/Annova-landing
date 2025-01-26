@@ -92,7 +92,7 @@ const ProcessSection: React.FC = () => {
   ];
 
   return (
-    <section className="relative min-h-screen w-full px-4 sm:px-8 py-20 overflow-hidden bg-black">
+    <section className="relative min-h-screen w-full px-4 sm:px-8 py-2 overflow-hidden bg-black">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(124,58,237,0.03),rgba(0,0,0,0))]"></div>

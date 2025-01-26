@@ -52,7 +52,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white py-12 px-4 md:px-8 flex items-center justify-center">
+    <div className=" bg-black text-white py-6 md:py-12 px-4 md:px-8 flex items-center justify-center">
       <div className="max-w-5xl mx-auto w-full">
         {/* Header Section */}
         <div className="text-center mb-10">
@@ -90,7 +90,7 @@ function App() {
           </div>
 
           {/* Project Info and Progress Indicators */}
-          <div className="mt-8 space-y-6">
+          <div className="mt-4 space-y-6">
             {/* Project Title and Navigation */}
             <div className="flex items-center justify-center gap-4">
               <button

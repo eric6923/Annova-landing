@@ -128,12 +128,12 @@ const WorkedWith: React.FC = () => {
             <p
               className={clsx(
                 { "translate-y-8 opacity-0": !isActive },
-                "mt-4 text-center text-gray-400 max-w-2xl mx-auto px-4 transition-[transform,opacity] duration-[--duration]",
+                "mt-6 text-center text-gray-400 max-w-2xl mx-auto px-4 transition-[transform,opacity] duration-[--duration]",
               )}>
               Empowering businesses through strategic partnerships and innovative solutions.
             </p>
   
-            <div className="mt-8 sm:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 mb-12 sm:mb-20">
+            <div className="mt-12 sm:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 mb-12 sm:mb-20">
               {stats.map((stat: Stat, index: number) => (
                 <motion.div
                   key={index}

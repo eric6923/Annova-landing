@@ -62,7 +62,8 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 lg:py-0">
+    <div className="min-h-screen bg-black flex items-center justify-center px-4 sm:px-6 lg:px-8 
+     lg:py-0">
       <div className="max-w-6xl w-full mx-auto">
         {/* Testimonial Header */}
         <div className="text-center mb-8 lg:mb-12">
