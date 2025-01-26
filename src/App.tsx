@@ -7,7 +7,7 @@ import WhyChooseUs from './components/WhyChooseUs';
 import WorkedWith from './components/WorkedWith';
 import Portfolio from './components/Portfolio';
 import OurProcess from './components/OurProcess';
-// import {TechStackMarquee} from './components/TechStack'
+import {OrbitingCirclesDemo} from './components/TechStack'
 import Testimonials from './components/Testimonials';
 import Team from './components/Team'
 // import OurProcess from './components/OurProcess';
@@ -37,9 +37,9 @@ function App() {
             <WorkedWith />
             <Portfolio />
             <OurProcess />
-            {/* <TechStackMarquee/> */}
             <Testimonials />
             <Team />
+            <OrbitingCirclesDemo/>
             {/* <Technologies />
             <CTASection />  */}
             {/* <FAQSection /> */}

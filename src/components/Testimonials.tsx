@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-
+import React, { useState, useRef } from 'react';
+import { ChevronLeft, ChevronRight, Volume2, VolumeX } from 'lucide-react';
+import video from './assets/test1.mp4'
 interface Testimonial {
   id: number;
   name: string;
   role: string;
   company: string;
-  image: string;
+  video: string;
   quote: string;
 }
 
@@ -16,7 +16,7 @@ const testimonials: Testimonial[] = [
     name: "Sonarike Mahajan",
     role: "Co-founder",
     company: "@Apollo Cranes",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+    video: video, // You'll add the video URL here
     quote: "The level of collaboration made the entire process smooth and enjoyable."
   },
   {
@@ -24,7 +24,7 @@ const testimonials: Testimonial[] = [
     name: "Sarah Johnson",
     role: "Project Manager",
     company: "@BuildTech",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80",
+    video: "", // You'll add the video URL here
     quote: "Their innovative approach transformed our construction workflow completely."
   },
   {
@@ -32,13 +32,15 @@ const testimonials: Testimonial[] = [
     name: "Michael Chen",
     role: "Site Director",
     company: "@ConstructPro",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+    video: "", // You'll add the video URL here
     quote: "The attention to detail and commitment to excellence was outstanding."
   }
 ];
 
 const Testimonials: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const next = () => {
     setCurrentIndex((prevIndex) => 
@@ -50,6 +52,13 @@ const Testimonials: React.FC = () => {
     setCurrentIndex((prevIndex) => 
       prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
     );
+  };
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(!isMuted);
+    }
   };
 
   return (
@@ -74,16 +83,30 @@ const Testimonials: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Image Section - Now first on mobile */}
+          {/* Video Section - Now first on mobile */}
           <div className="order-1 flex flex-col items-center">
-            {/* Image Container */}
+            {/* Video Container */}
             <div className="relative w-full max-w-[280px] lg:max-w-sm aspect-[3/4] rounded-3xl overflow-hidden mb-6">
-              <img
-                src={testimonials[currentIndex].image}
-                alt={testimonials[currentIndex].name}
+              <video
+                ref={videoRef}
+                autoPlay
+                loop
+                muted
+                playsInline
                 className="absolute inset-0 w-full h-full object-cover"
-              />
+              >
+                <source src={testimonials[currentIndex].video} type="video/mp4" />
+              </video>
               <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/20" />
+              
+              {/* Mute Button - Now positioned top left */}
+              <button
+                onClick={toggleMute}
+                className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                aria-label={isMuted ? "Unmute video" : "Mute video"}
+              >
+                {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+              </button>
             </div>
 
             {/* Navigation Buttons */}
@@ -105,7 +128,7 @@ const Testimonials: React.FC = () => {
             </div>
 
             {/* Name and Designation - Overlaid on image for desktop, visible on mobile */}
-            <div className=" text-center lg:hidden mb-6">
+            <div className="text-center lg:hidden mb-6">
               <h3 className="text-xl font-semibold text-white mb-1">
                 {testimonials[currentIndex].name}
               </h3>
@@ -116,7 +139,7 @@ const Testimonials: React.FC = () => {
           </div>
 
           {/* Quote and Desktop Navigation */}
-          <div className=" order-2 flex flex-col justify-center">
+          <div className="order-2 flex flex-col justify-center">
             {/* Quote */}
             <blockquote className="hidden lg:block text-2xl lg:text-4xl font-light text-white/90 leading-tight mb-8">
               "{testimonials[currentIndex].quote}"

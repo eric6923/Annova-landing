@@ -74,6 +74,9 @@
   body {
     @apply bg-black antialiased;
   }
+  :root {
+    --radius: 0.5rem;
+  }
 }
 
 @layer utilities {
