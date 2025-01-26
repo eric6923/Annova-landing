@@ -52,7 +52,7 @@ function App() {
   };
 
   return (
-    <div className=" bg-black text-white py-6 md:py-12 px-4 md:px-8 flex items-center justify-center">
+    <div className=" bg-black text-white md:py-12 px-4 md:px-8 flex items-center justify-center">
       <div className="max-w-5xl mx-auto w-full">
         {/* Header Section */}
         <div className="text-center mb-10">
