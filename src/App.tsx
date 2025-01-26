@@ -9,6 +9,7 @@ import Portfolio from './components/Portfolio';
 import OurProcess from './components/OurProcess';
 // import {TechStackMarquee} from './components/TechStack'
 import Testimonials from './components/Testimonials';
+import Team from './components/Team'
 // import OurProcess from './components/OurProcess';
 // import Testimonials from './components/Testimonials';
 // import TeamSection from './components/TeamSection';
@@ -38,7 +39,7 @@ function App() {
             <OurProcess />
             {/* <TechStackMarquee/> */}
             <Testimonials />
-            {/* <TeamSection /> */}
+            <Team />
             {/* <Technologies />
             <CTASection />  */}
             {/* <FAQSection /> */}
