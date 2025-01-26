@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Shield, Rocket, Users, Target } from 'lucide-react';
 import { useMotionValueEvent, useScroll, useTransform } from "framer-motion";
@@ -80,7 +78,7 @@ const ScrollStackCards = () => {
   return (
     <div ref={containerRef} className="lg:hidden min-h-screen relative">
       {/* Static header section */}
-      <div className="sticky top-0 pt-20  pb-10 px-4 bg-black">
+      <div className="sticky top-0 pt-20 pb-10 px-4 bg-black">
         <div className="flex justify-center mb-8">
           <div className="relative rounded-full border-2 border-violet-500 px-6 py-2 text-sm font-medium bg-black/20 backdrop-blur-sm before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl animate-glow-slow">
             Why Choose Us
@@ -95,23 +93,21 @@ const ScrollStackCards = () => {
       {/* Cards container */}
       <div className="h-[300vh] relative mr-4">
         {content.map((card, index) => {
-          const CARD_OFFSET = 200; // Increased spacing between cards
+          const CARD_OFFSET = 200;
           const INITIAL_Y = 20;
-          const SEGMENT_SIZE = 0.2; // Each card gets 20% of the scroll progress
+          const SEGMENT_SIZE = 0.2;
           const START_POINT = index * SEGMENT_SIZE;
 
           const y = useTransform(
             scrollYProgress,
             [
-              START_POINT, // Start of this card's animation
-              START_POINT + (SEGMENT_SIZE * 0.8), // End of this card's animation
-              1 // Full scroll
+              START_POINT,
+              START_POINT + (SEGMENT_SIZE * 0.8),
+              1
             ],
             [
-              // Start position - cards spaced out
               index === 0 ? INITIAL_Y : INITIAL_Y + (index * CARD_OFFSET),
-              // End position - stacked
-              INITIAL_Y + (index * 2), // Small offset to prevent cards from perfectly overlapping
+              INITIAL_Y + (index * 2),
               INITIAL_Y + (index * 2)
             ]
           );
@@ -146,6 +142,7 @@ const ScrollStackCards = () => {
     </div>
   );
 };
+
 export default function WhyChooseUsSection() {
   const [activeCard, setActiveCard] = React.useState(0);
   const ref = useRef<any>(null);
@@ -199,15 +196,18 @@ export default function WhyChooseUsSection() {
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-[90rem] pt-20 pb-10 px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-center mb-8 md:mb-16">
-          {/* <div className="relative rounded-full border-2 border-violet-500 px-6 sm:px-8 py-2 text-sm sm:text-base font-medium bg-black/20 backdrop-blur-sm before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl animate-glow-slow">
-            Why Choose Us
-          </div> */}
-        </div>
+        {/* Desktop-only header */}
+        <div className="hidden lg:block">
+          <div className="flex justify-center mb-8 md:mb-16">
+            <div className="relative rounded-full border-2 border-violet-500 px-6 sm:px-8 py-2 text-sm sm:text-base font-medium bg-black/20 backdrop-blur-sm before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl animate-glow-slow">
+              Why Choose Us
+            </div>
+          </div>
 
-        {/* <h2 className="text-center font-display text-3xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent mb-10 md:mb-20 px-4">
-          Your Success, Our Priority
-        </h2> */}
+          <h2 className="text-center font-display text-3xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent mb-10 md:mb-20 px-4">
+            Your Success, Our Priority
+          </h2>
+        </div>
 
         {/* Mobile View (< 1024px) */}
         <div className="lg:hidden">
