@@ -71,54 +71,81 @@ const content = [
 ];
 
 const ScrollStackCards = () => {
-  const ref = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end end"]
+    target: containerRef,
+    offset: ["start center", "end start"]
   });
 
   return (
-    <div ref={ref} className="lg:hidden h-[calc(200vh+200px)] relative">
-      {content.map((card, index) => {
-        const totalCards = content.length;
-        const CARD_SPACING = 60;
+    <div ref={containerRef} className="lg:hidden min-h-screen relative">
+      {/* Static header section */}
+      <div className="sticky top-0 pt-20  pb-10 px-4 bg-black">
+        <div className="flex justify-center mb-8">
+          <div className="relative rounded-full border-2 border-violet-500 px-6 py-2 text-sm font-medium bg-black/20 backdrop-blur-sm before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl animate-glow-slow">
+            Why Choose Us
+          </div>
+        </div>
 
-        const y = useTransform(
-          scrollYProgress, 
-          [0,1], 
-          [index * CARD_SPACING, -((totalCards - 1 - index) * CARD_SPACING)]
-        );
+        <h2 className="text-center font-display text-3xl font-bold bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent mb-10 px-4">
+          Your Success, Our Priority
+        </h2>
+      </div>
 
-        return (
-          <motion.div
-            key={index}
-            style={{ 
-              position: 'sticky', 
-              top: 0, 
-              y,
-              zIndex: index
-            }}
-            className="absolute left-1/2 -translate-x-1/2 w-[90%] p-4 mr-4 rounded-xl shadow-lg 
-                       bg-gradient-to-br from-black via-violet-950 to-violet-900 
-                       border border-violet-500/20 transition-shadow hover:shadow-xl"
-          >
-            <div className="flex flex-col items-center mb-4">
-              <div className="w-16 h-16 mb-4">
-                {index === 0 && <Shield className="w-full h-full text-violet-400" />}
-                {index === 1 && <Rocket className="w-full h-full text-violet-400" />}
-                {index === 2 && <Users className="w-full h-full text-violet-400" />}
-                {index === 3 && <Target className="w-full h-full text-violet-400" />}
+      {/* Cards container */}
+      <div className="h-[300vh] relative mr-4">
+        {content.map((card, index) => {
+          const CARD_OFFSET = 200; // Increased spacing between cards
+          const INITIAL_Y = 20;
+          const SEGMENT_SIZE = 0.2; // Each card gets 20% of the scroll progress
+          const START_POINT = index * SEGMENT_SIZE;
+
+          const y = useTransform(
+            scrollYProgress,
+            [
+              START_POINT, // Start of this card's animation
+              START_POINT + (SEGMENT_SIZE * 0.8), // End of this card's animation
+              1 // Full scroll
+            ],
+            [
+              // Start position - cards spaced out
+              index === 0 ? INITIAL_Y : INITIAL_Y + (index * CARD_OFFSET),
+              // End position - stacked
+              INITIAL_Y + (index * 2), // Small offset to prevent cards from perfectly overlapping
+              INITIAL_Y + (index * 2)
+            ]
+          );
+
+          return (
+            <motion.div
+              key={index}
+              style={{ 
+                position: 'sticky',
+                top: '250px',
+                y,
+                zIndex: index
+              }}
+              className="absolute left-1/2 -translate-x-1/2 w-[90%] p-6 rounded-xl shadow-lg 
+                         bg-gradient-to-br from-black via-violet-950 to-violet-900 
+                         border border-violet-500/20 transition-shadow hover:shadow-xl"
+            >
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 mb-4">
+                  {index === 0 && <Shield className="w-full h-full text-violet-400" />}
+                  {index === 1 && <Rocket className="w-full h-full text-violet-400" />}
+                  {index === 2 && <Users className="w-full h-full text-violet-400" />}
+                  {index === 3 && <Target className="w-full h-full text-violet-400" />}
+                </div>
+                <h2 className="text-xl font-bold text-white mb-3">{card.title}</h2>
+                <p className="text-gray-200 text-center">{card.description}</p>
               </div>
-              <h2 className="text-xl font-bold text-white mb-2">{card.title}</h2>
-              <p className="text-gray-200 text-center">{card.description}</p>
-            </div>
-          </motion.div>
-        );
-      })}
+            </motion.div>
+          );
+        })}
+      </div>
     </div>
   );
 };
-
 export default function WhyChooseUsSection() {
   const [activeCard, setActiveCard] = React.useState(0);
   const ref = useRef<any>(null);
@@ -173,14 +200,14 @@ export default function WhyChooseUsSection() {
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-[90rem] pt-20 pb-10 px-4 sm:px-6 lg:px-8">
         <div className="flex justify-center mb-8 md:mb-16">
-          <div className="relative rounded-full border-2 border-violet-500 px-6 sm:px-8 py-2 text-sm sm:text-base font-medium bg-black/20 backdrop-blur-sm before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl animate-glow-slow">
+          {/* <div className="relative rounded-full border-2 border-violet-500 px-6 sm:px-8 py-2 text-sm sm:text-base font-medium bg-black/20 backdrop-blur-sm before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl animate-glow-slow">
             Why Choose Us
-          </div>
+          </div> */}
         </div>
 
-        <h2 className="text-center font-display text-3xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent mb-10 md:mb-20 px-4">
+        {/* <h2 className="text-center font-display text-3xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent mb-10 md:mb-20 px-4">
           Your Success, Our Priority
-        </h2>
+        </h2> */}
 
         {/* Mobile View (< 1024px) */}
         <div className="lg:hidden">
