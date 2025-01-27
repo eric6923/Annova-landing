@@ -6,10 +6,37 @@ import node from '@/components/assets/node.svg'
 import typescript from '@/components/assets/typescript.svg' 
 import aws from '@/components/assets/aws.svg' 
 import spring from '@/components/assets/spring.svg' 
-import laravel from '@/components/assets/laravel2.svg' 
+import laravel from '@/components/assets/laravel2.svg'
+import clsx from "clsx";
+
 export function OrbitingCirclesDemo() {
   return (
-    <div className="relative flex h-[400px] w-full flex-col items-center justify-center overflow-hidden bg-background md:h-[600px]">
+    <div className="relative flex h-[900px] w-full flex-col items-center justify-center overflow-hidden bg-background md:h-[800px]">
+      {/* Title Section from Services Component */}
+      <div className="relative z-10 mx-auto max-w-7xl [--duration:800ms] pb-96">
+        <div className="flex justify-center mt-2 sm:mt-6">
+          <div className="
+            relative rounded-full border-2 border-violet-500 px-8 py-2 text-base font-medium
+            bg-black/20 backdrop-blur-sm
+            before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl
+            animate-glow-slow
+          ">
+            Tech Stack
+          </div>
+        </div>
+
+        <h2 className="mt-6 text-center font-display text-4xl md:text-5xl font-bold
+          bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent
+          leading-[1.15] md:leading-[1.3]">
+          Technologies We Master
+        </h2>
+        
+        <p className="mt-4 text-center text-gray-400 max-w-2xl mx-auto md:mb-40 mb-44">
+          Our expertise spans across modern web technologies and cloud platforms.
+        </p>
+      </div>
+
+      {/* Existing Orbiting Circles Content */}
       <OrbitingCircles
         iconSize={30}
         radius={120}
@@ -55,11 +82,10 @@ export function OrbitingCirclesDemo() {
   );
 }
 
-
 export const Icons = {
   react: () => (
     <img
-      src={react} // Adjust the path based on your image location
+      src={react}
       alt="Custom Icon"
       width="30"
       height="30"
@@ -72,7 +98,7 @@ export const Icons = {
   ),
   nodejs: () => (
     <img
-      src={node} // Adjust the path based on your image location
+      src={node}
       alt="Custom Icon"
       width="30"
       height="70"
@@ -85,7 +111,7 @@ export const Icons = {
   ),
   typescript: () => (
     <img
-      src={typescript} // Adjust the path based on your image location
+      src={typescript}
       alt="Custom Icon"
       width="30"
       height="70"
@@ -93,7 +119,7 @@ export const Icons = {
   ),
   aws: () => (
     <img
-      src={aws} // Adjust the path based on your image location
+      src={aws}
       alt="Custom Icon"
       width="30"
       height="70"
@@ -106,7 +132,7 @@ export const Icons = {
   ),
   spring: () => (
     <img
-      src={spring} // Adjust the path based on your image location
+      src={spring}
       alt="Custom Icon"
       width="30"
       height="70"
@@ -114,7 +140,7 @@ export const Icons = {
   ),
   laravel: () => (
     <img
-      src={laravel} // Adjust the path based on your image location
+      src={laravel}
       alt="Custom Icon"
       width="30"
       height="70"
