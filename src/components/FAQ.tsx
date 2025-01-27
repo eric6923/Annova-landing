@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, Minus } from 'lucide-react';
+import { X, Plus } from 'lucide-react';
 
 interface FAQItem {
   question: string;
@@ -28,22 +28,21 @@ const faqs: FAQItem[] = [
       answer: "Absolutely! We have extensive experience in taking over and improving existing projects. Our team can analyze your current solution and propose improvements or necessary modifications."
     }
   ];
+
 function FAQItem({ question, answer }: FAQItem) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    
-    <div className="mb-4 last:mb-0 bg-zinc-900/50">
-        
+    <div className="mb-4 last:mb-0 bg-zinc-900/40 rounded-lg backdrop-blur-sm">
       <button
-        className="w-full py-6 px-4 sm:px-6 flex items-center justify-between text-left hover:bg-zinc-800/50 transition-colors"
+        className="w-full py-5 px-6 flex items-center justify-between text-left transition-colors"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="text-white text-lg pr-8">{question}</span>
+        <span className="text-white text-lg font-medium tracking-wide">{question}</span>
         {isOpen ? (
-          <Minus className="w-6 h-6 text-white flex-shrink-0" />
+          <X className="w-5 h-5 text-white/80" />
         ) : (
-          <Plus className="w-6 h-6 text-white flex-shrink-0" />
+          <Plus className="w-5 h-5 text-white/80" />
         )}
       </button>
       <div
@@ -51,7 +50,7 @@ function FAQItem({ question, answer }: FAQItem) {
           isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <p className="px-4 sm:px-6 pb-6 text-zinc-400 text-base leading-relaxed">
+        <p className="px-6 pb-5 text-white/70 text-base leading-relaxed">
           {answer}
         </p>
       </div>
@@ -62,8 +61,8 @@ function FAQItem({ question, answer }: FAQItem) {
 function App() {
   return (
     <div className="min-h-screen bg-black flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-3xl">
-      <div className="relative z-10 mx-auto max-w-7xl [--duration:800ms] pb-16 ">
+      <div className="w-full max-w-2xl">
+      <div className="relative z-10 mx-auto max-w-7xl [--duration:800ms] pb-20 ">
           <div className="flex justify-center mt-2 sm:mt-6">
             <div className="
               relative rounded-full border-2 border-violet-500 px-8 py-2 text-base font-medium
@@ -76,7 +75,7 @@ function App() {
           </div>
         </div>
         
-        <div className="space-y-4">
+        <div className="space-y-3">
           {faqs.map((faq, index) => (
             <FAQItem key={index} question={faq.question} answer={faq.answer} />
           ))}
