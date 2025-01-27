@@ -16,7 +16,7 @@ import Team from './components/Team'
 // import Technologies from './components/Technologies';
 // import CTASection from './components/CTA';
 import FAQSection from './components/FAQ';
-// import Footer from './components/Footer';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -42,7 +42,7 @@ function App() {
             <OrbitingCirclesDemo/>        
             <FAQSection />
           </main>
-          {/* <Footer /> */}
+          <Footer />
         </motion.div>
       </AnimatePresence>
     </Router>
