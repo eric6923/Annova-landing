@@ -14,7 +14,7 @@ import Team from './components/Team'
 // import Testimonials from './components/Testimonials';
 // import TeamSection from './components/TeamSection';
 // import Technologies from './components/Technologies';
-// import CTASection from './components/CTASection';
+// import CTASection from './components/CTA';
 // import FAQSection from './components/FAQSection';
 // import Footer from './components/Footer';
 
@@ -40,8 +40,9 @@ function App() {
             <Testimonials />
             <Team />
             <OrbitingCirclesDemo/>
+            {/* <CTASection />  */}
             {/* <Technologies />
-            <CTASection />  */}
+            
             {/* <FAQSection /> */}
           </main>
           {/* <Footer /> */}

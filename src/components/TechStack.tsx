@@ -1,84 +1,118 @@
-import { OrbitingCircles } from "../components/ui/orbiting-circles";
+import { OrbitingCircles } from "./ui/orbiting-circles";
 import YourCustomIcon from "@/components/assets/profile.ico";
-import { Code2, Server, Blocks } from "lucide-react";
+import { ArrowRight, Clock } from 'lucide-react';
 import react from '@/components/assets/react.svg'
 import node from '@/components/assets/node.svg' 
 import typescript from '@/components/assets/typescript.svg' 
 import aws from '@/components/assets/aws.svg' 
 import spring from '@/components/assets/spring.svg' 
 import laravel from '@/components/assets/laravel2.svg'
-import clsx from "clsx";
 
 export function OrbitingCirclesDemo() {
   return (
-    <div className="relative flex h-[900px] w-full flex-col items-center justify-center overflow-hidden bg-background md:h-[800px]">
-      {/* Title Section from Services Component */}
-      <div className="relative z-10 mx-auto max-w-7xl [--duration:800ms] pb-96">
-        <div className="flex justify-center mt-2 sm:mt-6">
-          <div className="
-            relative rounded-full border-2 border-violet-500 px-8 py-2 text-base font-medium
-            bg-black/20 backdrop-blur-sm
-            before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl
-            animate-glow-slow
-          ">
-            Tech Stack
+    <>
+      {/* Tech Stack Section */}
+      <div className="relative flex h-[450px] w-full flex-col items-center justify-center overflow-hidden bg-background md:h-[800px]">
+        {/* Title Section from Services Component */}
+        <div className="relative z-10 mx-auto max-w-7xl [--duration:800ms] pb-96 ">
+          <div className="flex justify-center mt-2 sm:mt-6">
+            <div className="
+              relative rounded-full border-2 border-violet-500 px-8 py-2 text-base font-medium
+              bg-black/20 backdrop-blur-sm
+              before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl
+              animate-glow-slow
+            ">
+              Tech Stack
+            </div>
           </div>
         </div>
 
-        <h2 className="mt-6 text-center font-display text-4xl md:text-5xl font-bold
-          bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent
-          leading-[1.15] md:leading-[1.3]">
-          Technologies We Master
-        </h2>
-        
-        <p className="mt-4 text-center text-gray-400 max-w-2xl mx-auto md:mb-40 mb-44">
-          Our expertise spans across modern web technologies and cloud platforms.
-        </p>
+        {/* Existing Orbiting Circles Content */}
+        <OrbitingCircles
+          iconSize={30}
+          radius={120}
+          className="md:scale-125"
+          centerIcon={
+            <div className="w-12 h-12 rounded-full overflow-hidden">
+              <img
+                src={YourCustomIcon}
+                alt="Profile Icon"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          }
+        >
+          <Icons.react />
+          <Icons.nextjs />
+          <Icons.nodejs />
+          <Icons.express />
+          <Icons.typescript />
+        </OrbitingCircles>
+        <OrbitingCircles
+          iconSize={25}
+          radius={80}
+          reverse
+          speed={2}
+          className="md:scale-125"
+          centerIcon={
+            <div className="w-12 h-12 rounded-full overflow-hidden">
+              <img
+                src={YourCustomIcon}
+                alt="Profile Icon"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          }
+        >
+          <Icons.aws />
+          <Icons.vercel />
+          <Icons.spring />
+          <Icons.laravel />
+        </OrbitingCircles>
       </div>
 
-      {/* Existing Orbiting Circles Content */}
-      <OrbitingCircles
-        iconSize={30}
-        radius={120}
-        className="md:scale-125"
-        centerIcon={
-          <div className="w-12 h-12 rounded-full overflow-hidden">
-            <img
-              src={YourCustomIcon}
-              alt="Profile Icon"
-              className="w-full h-full object-cover"
-            />
+      {/* CTA Section */}
+      <div className=" bg-gradient-to-br p-4 md:p-8 flex items-center justify-center">
+        <div className="relative w-[380px] md:w-[1080px] mx-auto">
+          {/* Card container with modern glass effect */}
+          <div className="bg-gradient-to-br from-violet-700 via-violet-800 to-indigo-900 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden backdrop-blur-sm shadow-[0_8px_32px_rgba(79,70,229,0.15)] border border-white/10">
+            {/* Decorative elements */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-violet-400/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2" />
+            
+            {/* Animated mesh gradient background */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,0,255,0.1),transparent_50%)] animate-pulse" />
+
+            {/* Top notification with enhanced design */}
+            <div className="relative flex items-center gap-3 text-sm md:text-base mb-10 md:mb-14">
+              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-5 py-2.5 rounded-full border border-white/10 shadow-inner">
+                <Clock className="w-4 h-4 text-violet-200 animate-pulse" />
+                <span className="font-medium tracking-wide text-violet-50">2 MORE SPOTS AVAILABLE THIS MONTH</span>
+              </div>
+            </div>
+
+            {/* Main content with improved typography */}
+            <div className="relative space-y-10 md:space-y-12">
+              <h2 className="text-4xl md:text-6xl font-bold leading-tight tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-violet-50 to-violet-100">
+                Ready to drive up<br className="hidden md:block" /> your business?
+              </h2>
+              
+              <button className="group relative flex items-center gap-3 bg-white text-violet-900 rounded-full pl-7 pr-6 py-4 font-semibold transition-all duration-300 hover:shadow-[0_8px_32px_rgba(255,255,255,0.2)] hover:scale-[1.02] active:scale-95">
+                <span className="text-lg">Start a Project</span>
+                <div className="w-9 h-9 rounded-full bg-violet-100 flex items-center justify-center">
+                  <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </div>
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-violet-200/0 via-violet-200/10 to-violet-200/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </button>
+            </div>
+
+            {/* Enhanced gradient overlays */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-violet-900/20 via-transparent to-indigo-900/20" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_100%,rgba(120,0,255,0.15),transparent_50%)]" />
           </div>
-        }
-      >
-        <Icons.react />
-        <Icons.nextjs />
-        <Icons.nodejs />
-        <Icons.express />
-        <Icons.typescript />
-      </OrbitingCircles>
-      <OrbitingCircles
-        iconSize={25}
-        radius={80}
-        reverse
-        speed={2}
-        className="md:scale-125"
-        centerIcon={
-          <div className="w-12 h-12 rounded-full overflow-hidden">
-            <img
-              src={YourCustomIcon}
-              alt="Profile Icon"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        }
-      >
-        <Icons.aws />
-        <Icons.vercel />
-        <Icons.spring />
-        <Icons.laravel />
-      </OrbitingCircles>
-    </div>
+        </div>
+      </div>
+    </>
   );
 }
 
