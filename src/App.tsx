@@ -17,6 +17,7 @@ import Team from './components/Team'
 // import CTASection from './components/CTA';
 import FAQSection from './components/FAQ';
 import Footer from './components/Footer';
+// import CrossMarquee from './components/CrossMarquee';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Header />
           <main className="space-y-16 md:space-y-24">
             <HeroSection />
+            {/* <CrossMarquee/> */}
             <ServicesSection />
             <WhyChooseUs />
             <WorkedWith />
