@@ -15,7 +15,7 @@ import Team from './components/Team'
 // import TeamSection from './components/TeamSection';
 // import Technologies from './components/Technologies';
 // import CTASection from './components/CTA';
-// import FAQSection from './components/FAQSection';
+import FAQSection from './components/FAQ';
 // import Footer from './components/Footer';
 
 function App() {
@@ -39,11 +39,8 @@ function App() {
             <OurProcess />
             <Testimonials />
             <Team />
-            <OrbitingCirclesDemo/>
-            {/* <CTASection />  */}
-            {/* <Technologies />
-            
-            {/* <FAQSection /> */}
+            <OrbitingCirclesDemo/>        
+            <FAQSection />
           </main>
           {/* <Footer /> */}
         </motion.div>
