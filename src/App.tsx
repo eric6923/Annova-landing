@@ -17,7 +17,9 @@ import Team from './components/Team'
 // import CTASection from './components/CTA';
 import FAQSection from './components/FAQ';
 import Footer from './components/Footer';
-// import CrossMarquee from './components/CrossMarquee';
+import CrossMarquee from './components/CrossMarquee';
+import WhatsAppButton from './components/WhatsaAppButton';
+import Chatbot from './components/chatbot/Chat';
 
 function App() {
   return (
@@ -33,7 +35,7 @@ function App() {
           <Header />
           <main className="space-y-16 md:space-y-24">
             <HeroSection />
-            {/* <CrossMarquee/> */}
+            
             <ServicesSection />
             <WhyChooseUs />
             <WorkedWith />
@@ -41,10 +43,13 @@ function App() {
             <OurProcess />
             <Testimonials />
             <Team />
-            <OrbitingCirclesDemo/>        
+            <OrbitingCirclesDemo/> 
+            <CrossMarquee/>       
             <FAQSection />
           </main>
           <Footer />
+          <WhatsAppButton/>
+          <Chatbot/>
         </motion.div>
       </AnimatePresence>
     </Router>

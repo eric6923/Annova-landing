@@ -9,7 +9,7 @@ const MarqueeContent = () => (
 
 const CrossMarquee: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className=" bg-black">
       <div className="py-6 sm:py-20 overflow-hidden relative w-screen">
         {/* Top Marquee */}
         <div className="relative flex overflow-x-hidden -rotate-[8deg] sm:-rotate-6 scale-100 sm:scale-125 translate-y-8 sm:translate-y-8 w-[150%] sm:w-full -ml-[25%] sm:ml-0">
