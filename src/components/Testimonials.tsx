@@ -67,20 +67,24 @@ const Testimonials: React.FC = () => {
       <div className="max-w-6xl w-full mx-auto">
         {/* Testimonial Header */}
         <div className="text-center mb-8 lg:mb-12">
-          <div className="inline-flex px-4 py-2 rounded-full bg-[#2A2A2A] mb-4">
-            <span className="text-white/90 text-sm font-medium">
-              Testimonials
-            </span>
-          </div>
-          
-          <h2 className="text-4xl lg:text-6xl font-bold leading-tight">
-            <div className="bg-gradient-to-r from-violet-400 to-violet-600 text-transparent bg-clip-text inline-block">
-              Real Stories,
-            </div>
-            <div className="text-white">
-              Real Voices
-            </div>
-          </h2>
+  <div className="flex justify-center mt-2 sm:mt-6">
+    <div className="
+      relative rounded-full border-2 border-violet-500 px-8 py-2 text-base font-medium
+      bg-black/20 backdrop-blur-sm
+      before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl
+      animate-glow-slow
+    ">
+      Testimonials
+    </div>
+  </div>
+  
+  <h2 className="
+    mt-6 text-center font-display text-4xl md:text-5xl font-bold
+    bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent
+    leading-[1.15] md:leading-[1.3]
+  ">
+    Real Stories, Real Voices
+  </h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

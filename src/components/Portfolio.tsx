@@ -55,14 +55,31 @@ function App() {
     <div className=" bg-black text-white md:py-12 px-4 md:px-8 flex items-center justify-center">
       <div className="max-w-5xl mx-auto w-full">
         {/* Header Section */}
-        <div className="text-center mb-10">
-          <button className="bg-violet-900/50 text-white px-4 py-1 rounded-full text-sm mb-4">
-            Case Studies
-          </button>
-          <h1 className="text-4xl md:text-6xl font-bold mb-3 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 bg-clip-text text-transparent">
-            Our Finest Works
-          </h1>
-        </div>
+        {/* Header Section */}
+<div className="text-center mb-10">
+  <div className="flex justify-center">
+    <div className="
+      relative rounded-full border-2 border-violet-500 px-8 py-2 text-base font-medium
+      bg-black/20 backdrop-blur-sm
+      before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl
+      animate-glow-slow
+    ">
+      Case Studies
+    </div>
+  </div>
+  
+  <h2 className="
+    mt-6 text-center font-display text-4xl md:text-5xl font-bold
+    bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent
+    leading-[1.15] md:leading-[1.3]
+  ">
+    Our Finest Works
+  </h2>
+  
+  <p className="mt-4 text-center text-gray-400 max-w-2xl mx-auto">
+    Explore our portfolio of successful projects and innovative solutions.
+  </p>
+</div>
 
         {/* Carousel Section */}
         <div className="relative">

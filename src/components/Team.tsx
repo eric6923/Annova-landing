@@ -97,32 +97,28 @@ function App() {
         {(isActive) => (
           <>
             <div
-              className={clsx(
-                { "translate-y-8 opacity-0": !isActive },
-                "flex justify-center mb-4 transition-[transform,opacity] duration-[--duration]",
-              )}>
-              <div className="
-                relative rounded-full border-2 border-violet-500 px-8 py-2 text-base font-medium
-                bg-black/20 backdrop-blur-sm group hover:scale-105 transition-transform duration-300
-                before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl
-                after:absolute after:inset-0 after:-z-20 after:rounded-full after:bg-violet-500/10 after:blur-2xl
-                animate-pulse-slow
-              ">
-                <span className="relative z-10 bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent">
-                  Our Team
-                </span>
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-violet-500/20 via-transparent to-violet-500/20 animate-pulse-slow"></div>
-              </div>
-            </div>
+        className={clsx(
+          { "translate-y-8 opacity-0": !isActive },
+          "flex justify-center mt-2 sm:mt-6 transition-[transform,opacity] duration-[--duration]",
+        )}>
+        <div className="
+          relative rounded-full border-2 border-violet-500 px-8 py-2 text-base font-medium
+          bg-black/20 backdrop-blur-sm
+          before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl
+          animate-glow-slow mb-6
+        ">
+          Our Team
+        </div>
+      </div>
 
             <h2
               className={clsx(
                 { "translate-y-8 opacity-0": !isActive },
                 "text-4xl md:text-5xl font-bold transition-[transform,opacity] duration-[--duration]",
                 "bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent",
-                "leading-[1.15] md:leading-[1.3]"
+                "leading-[1.15] md:leading-[1.3] font-sans"
               )}>
-              Meet Our Exceptional Team
+              Meet Our Team
             </h2>
             
             <p

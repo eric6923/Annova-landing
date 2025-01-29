@@ -165,7 +165,7 @@ User input: ${userInput}`;
                   <Bot className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h2 className="font-semibold text-white">AI Assistant</h2>
+                  <h2 className="font-semibold text-white">Anovas Assistant</h2>
                   <div className="flex items-center gap-2 text-xs text-white/80">
                     <span className="flex h-2 w-2">
                       <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-emerald-400 opacity-75"></span>
