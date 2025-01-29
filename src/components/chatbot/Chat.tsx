@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { MessageSquare, Send, X } from "lucide-react";
 import { MdOutlineChat } from "react-icons/md";
-
 import { websiteData } from "./WebsiteData";
 
 interface ChatMessage {
@@ -11,7 +10,6 @@ interface ChatMessage {
 
 const Chatbot = () => {
   const [showOnlineStatus, setShowOnlineStatus] = useState(true);
-
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: "assistant",
@@ -22,12 +20,12 @@ const Chatbot = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!isOpen) {
       const timer = setTimeout(() => {
         setShowOnlineStatus(false);
       }, 3000);
-
       return () => clearTimeout(timer);
     }
   }, [isOpen]);
@@ -41,8 +39,7 @@ const Chatbot = () => {
   }, [messages]);
 
   const GEMINI_API_KEY = "AIzaSyCRd4RjJB7AuwMKGtj5eaaqIyoAWpU-q8c";
-  const API_URL =
-    "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+  const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
 
   const formatContactInfo = (type: string) => {
     if (type === "phone") {
@@ -104,11 +101,7 @@ User input: ${userInput}`;
       const data = await response.json();
       let responseContent = data.candidates[0].content.parts[0].text;
 
-      // Check if response contains contact information and format it
-      if (
-        responseContent.includes("contact") &&
-        responseContent.includes("phone")
-      ) {
+      if (responseContent.includes("contact") && responseContent.includes("phone")) {
         responseContent = formatContactInfo("all");
       } else if (responseContent.includes("phone")) {
         responseContent = formatContactInfo("phone");
@@ -125,69 +118,67 @@ User input: ${userInput}`;
       console.error("Error:", error);
       const errorMessage: ChatMessage = {
         role: "assistant",
-        content:
-          "Please contact us:\nCall: +91 93508 51909\nEmail: totemmangement@gmail.com",
+        content: "Please contact us:\nCall: +91 93508 51909\nEmail: totemmangement@gmail.com",
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }
   };
+
   return (
     <div className="fixed bottom-4 right-4 z-[100]">
       {!isOpen && (
         <div className="relative">
           <button
             onClick={() => setIsOpen(true)}
-            className="group w-14 h-14 bg-violet-900 rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+            className="group w-16 h-16 bg-gradient-to-r from-violet-600 to-violet-800 rounded-full flex items-center justify-center shadow-lg hover:shadow-violet-500/50 hover:scale-105 transition-all duration-300 ease-in-out"
           >
-            <MdOutlineChat className="w-6 h-6 text-white group-hover:rotate-12 transition-transform duration-300" />
+            <MdOutlineChat className="w-7 h-7 text-white group-hover:rotate-12 transition-transform duration-300" />
           </button>
           {showOnlineStatus && (
-            <div className="absolute bottom-full right-0 mb-2 bg-white text-black py-2 px-4 rounded-lg shadow-lg min-w-[170px] transform-gpu animate-fadeIn mr-2">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-1" />
-                <p className="text-body font-medium">We are online !</p>
+            <div className="absolute bottom-full right-0 mb-3 bg-white text-black py-2.5 px-4 rounded-2xl shadow-lg min-w-[180px] transform-gpu animate-fadeIn mr-2">
+              <div className="flex items-center gap-2.5">
+                <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse mr-1" />
+                <p className="text-sm font-medium text-gray-800">We're here to help!</p>
               </div>
-              <div className="absolute bottom-0 right-4 transform translate-y-1/2 rotate-45 w-2 h-2 bg-white"></div>
+              <div className="absolute bottom-0 right-4 transform translate-y-1/2 rotate-45 w-3 h-3 bg-white"></div>
             </div>
           )}
         </div>
       )}
 
       {isOpen && (
-        <div className="w-full sm:w-[400px] fixed sm:relative bottom-0 right-0 sm:bottom-auto sm:right-auto bg-white rounded-t-lg sm:rounded-lg shadow-2xl border border-gray-200 overflow-hidden transform-gpu animate-slideUp">
-          <div className="flex items-center justify-between p-4 bg-black text-white">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full" />
-              <h2 className="font-medium text-sm">Anovas Assistant</h2>
+        <div className="w-full sm:w-[420px] fixed sm:relative bottom-0 right-0 sm:bottom-auto sm:right-auto bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform-gpu animate-slideUp">
+          <div className="flex items-center justify-between p-4 bg-gradient-to-r from-violet-600 to-violet-800 text-white">
+            <div className="flex items-center gap-3">
+              <div className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse" />
+              <h2 className="font-semibold text-sm tracking-wide">Anovas Assistant</h2>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="hover:bg-white/10 p-1.5 rounded-full transition-colors duration-200"
+              className="hover:bg-white/20 p-1.5 rounded-full transition-colors duration-200"
             >
-              <X className="w-4 h-4" />
+              <X className="w-5 h-5" />
             </button>
           </div>
 
-          <div className="h-[60vh] sm:h-[400px] overflow-y-auto p-4 space-y-4">
+          <div className="h-[65vh] sm:h-[450px] overflow-y-auto p-4 space-y-4 bg-gray-50">
             {messages.map((message, index) => (
               <div
                 key={index}
-                className={`flex ${
-                  message.role === "user" ? "justify-end" : "justify-start"
-                } items-end gap-2`}
+                className={`flex ${message.role === "user" ? "justify-end" : "justify-start"} items-end gap-2`}
               >
                 {message.role === "assistant" && (
-                  <div className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
-                    <MessageSquare className="w-3 h-3 text-gray-600" />
+                  <div className="w-8 h-8 rounded-full bg-violet-100 flex items-center justify-center flex-shrink-0">
+                    <MessageSquare className="w-4 h-4 text-violet-600" />
                   </div>
                 )}
                 <div
-                  className={`max-w-[80%] p-3 rounded-lg ${
+                  className={`max-w-[85%] p-3.5 rounded-2xl ${
                     message.role === "user"
-                      ? "bg-black text-white"
-                      : "bg-gray-100 text-gray-800"
+                      ? "bg-gradient-to-r from-violet-600 to-violet-800 text-white"
+                      : "bg-white text-gray-800 shadow-sm border border-gray-100"
                   }`}
                 >
                   {message.content.split("\n").map((line, i) => (
@@ -200,14 +191,14 @@ User input: ${userInput}`;
             ))}
             {isLoading && (
               <div className="flex justify-start items-end gap-2">
-                <div className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
-                  <MessageSquare className="w-3 h-3 text-gray-600" />
+                <div className="w-8 h-8 rounded-full bg-violet-100 flex items-center justify-center flex-shrink-0">
+                  <MessageSquare className="w-4 h-4 text-violet-600" />
                 </div>
-                <div className="bg-gray-100 p-3 rounded-lg">
-                  <div className="flex space-x-1">
-                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
-                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce delay-150"></div>
-                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce delay-300"></div>
+                <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                  <div className="flex space-x-1.5">
+                    <div className="w-2 h-2 bg-violet-400 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-violet-400 rounded-full animate-bounce delay-150"></div>
+                    <div className="w-2 h-2 bg-violet-400 rounded-full animate-bounce delay-300"></div>
                   </div>
                 </div>
               </div>
@@ -215,7 +206,7 @@ User input: ${userInput}`;
             <div ref={messagesEndRef} />
           </div>
 
-          <div className="p-4 border-t border-gray-200 bg-white">
+          <div className="p-4 border-t border-gray-100 bg-white">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -228,14 +219,14 @@ User input: ${userInput}`;
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Type your message..."
-                className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-black/20 bg-gray-50 placeholder-gray-400 text-gray-800"
+                className="flex-1 px-4 py-3 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-500/20 bg-gray-50 placeholder-gray-400 text-gray-800"
               />
               <button
                 type="submit"
                 disabled={isLoading}
-                className="p-2 bg-black text-white rounded-md hover:bg-black/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                className="p-3 bg-gradient-to-r from-violet-600 to-violet-800 text-white rounded-xl hover:shadow-lg hover:shadow-violet-500/25 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-5 h-5" />
               </button>
             </form>
           </div>
