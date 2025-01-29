@@ -49,6 +49,17 @@
   }
 }
 
+@keyframes wave {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
 .animate-marquee {
   animation: marquee 20s linear infinite;
 }
@@ -68,6 +79,23 @@
 
 .animate-drift-1 {
   animation: drift-1 20s linear infinite;
+}
+
+.animate-wave > div {
+  animation: wave 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animation-delay-200 {
+  animation-delay: 100ms !important;
+}
+
+.animation-delay-400 {
+  animation-delay: 200ms !important;
+}
+
+/* Ensure the waves don't affect button clickability */
+.animate-wave {
+  pointer-events: none;
 }
 
 @layer base {
