@@ -1,171 +1,110 @@
 export const websiteData = {
-    "company": {
-      "name": "Totem Management and Consultancy",
-      "location": "Kurukshetra, Haryana",
-      "established": "2023",
-      "description": "A digital marketing company providing complete digital solutions for people and brands",
+  "company": {
+      "name": "Anovas",
+      "location": "Jaunpur, Uttar Pradesh, India",
+      "established": "2022",
+      "description": "Anovas is a software solutions agency committed to delivering cutting-edge digital solutions that empower businesses to grow and innovate.",
       "contact": {
-        "emails": [
-          "totemmangement@gmail.com",
-          "info@totemservices.org"
-        ],
-        "phones": [
-          "+91 82784 16000",
-          "+91 93508 51909"
-        ],
-        "address": "SCO 10A, Manjha Market, Near Lakshman Chowk, Birala Mandir, Kurukshetra, Haryana",
-        "social": {
-          "instagram": "https://www.instagram.com/totem_management_consultancy/profilecard/",
-          "facebook": "https://www.facebook.com/people/TOTEM-Management/61551952082801/?mibextid=ZbWKwL",
-          "twitter": "https://x.com/totemmangement?t=3EEwzPWxyVaHfKPDIz3Qzw&s=09&mx=2"
-        }
+          "emails": ["weanovas@gmail.com"],
+          "phones": ["+91 79921 93730"],
+          "address": "Jaunpur, Uttar Pradesh, India",
+          "social": {
+              "linkedin": "https://www.linkedin.com/company/anovas-tech-solutions/",
+              "instagram": "https://www.instagram.com/anovas.in?igsh=MTdtOHpzNnczdW13Zg=="
+          }
       }
-    },
-    "hero": {
-      "title": "We Empower Brands and Individuals",
-      "subtitle": "A one-stop shop for the solution of Digital Marketing, Content Creation, Graphics, Animation, and Customized Courses that demonstrate individuals and brands."
-    },
-    "services": [
+  },
+  "hero": {
+      "title": "Transforming Ideas into Digital Reality",
+      "subtitle": "We craft exceptional digital experiences that elevate brands and drive success through innovative solutions and cutting-edge technology."
+  },
+  "services": [
       {
-        "name": "Digital Marketing",
-        "description": "Boost your brand's online presence with our data-driven digital marketing strategies.",
-        "subServices": [
-          "Branding & Logo",
-          "Content Marketing",
-          "SEO & Google Ads (PPC)",
-          "Social Media Marketing",
-          "Lead Generation",
-          "Affiliate Marketing"
-        ]
+          "name": "Web Development",
+          "description": "Design and develop responsive, high-performing websites tailored to your business needs.",
+          "subServices": ["Frontend Development", "Backend Development", "E-commerce Solutions", "CMS Development", "UI/UX Optimization"]
       },
       {
-        "name": "Graphics Design",
-        "description": "Transform your ideas into stunning visuals with our services.",
-        "subServices": [
-          "Visual Branding",
-          "Content Creation",
-          "Social Media Design",
-          "Marketing Design",
-          "Web Design"
-        ]
+          "name": "App Development",
+          "description": "Create scalable, feature-rich mobile applications for Android and iOS platforms.",
+          "subServices": ["iOS App Development", "Android App Development", "Cross-Platform Apps", "UI/UX Design", "App Maintenance & Support"]
       },
       {
-        "name": "Media Production",
-        "description": "Enhance your footage with our professional video editing services.",
-        "subServices": [
-          "Scriptwriting",
-          "Pre-production",
-          "Filming",
-          "Editing",
-          "Animation"
-        ]
+          "name": "Software Development",
+          "description": "Custom software solutions designed to streamline business operations and enhance efficiency.",
+          "subServices": ["Enterprise Software", "Cloud-Based Solutions", "SaaS Development", "Automation Tools", "API Development"]
       },
       {
-        "name": "UI/UX Design",
-        "description": "Design accessible and visually appealing interfaces with UI/UX Services.",
-        "subServices": [
-          "Research",
-          "Flowchart",
-          "Wireframes",
-          "Prototype",
-          "Development"
-        ]
+          "name": "Branding",
+          "description": "Develop a strong brand identity that sets you apart from the competition.",
+          "subServices": ["Logo Design", "Brand Strategy", "Brand Messaging", "Corporate Identity", "Packaging Design"]
       },
       {
-        "name": "Animation",
-        "description": "Bring ideas to life with our Animation Services.",
-        "subServices": [
-          "Script Storyboarding",
-          "Modeling & Rigging",
-          "Plugin & Animation",
-          "Rendering",
-          "Architectural Visualization",
-          "Product Visualization"
-        ]
+          "name": "Social Media Management",
+          "description": "Enhance your brand presence and engagement through strategic social media marketing.",
+          "subServices": ["Content Creation", "Community Management", "Social Media Strategy", "Analytics & Reporting", "Influencer Marketing"]
       },
       {
-        "name": "Customized Courses",
-        "description": "We design tailored educational experiences that engage learners.",
-        "availableCourses": [
-          "Digital Marketing",
-          "Graphics Design",
-          "Web Design",
-          "Video Editing"
-        ]
+          "name": "Ads Creation",
+          "description": "Design and execute high-performing digital ad campaigns for maximum reach and ROI.",
+          "subServices": ["Google Ads", "Facebook & Instagram Ads", "LinkedIn Advertising", "YouTube Ads", "Retargeting Campaigns"]
       }
-    ],
-    "team": [
+  ],
+  "team": [
       {
-        "name": "Parveen Sharma",
-        "role": "CEO"
+          "name": "Anuhav Singh",
+          "role": "CEO & Founder"
+      },
+  ],
+  "values": [
+      {
+          "name": "Innovation",
+          "description": "We constantly push the boundaries of technology to provide cutting-edge solutions."
       },
       {
-        "name": "Arupama Rana",
-        "role": "Designer"
+          "name": "Client-Centric Approach",
+          "description": "Our customers are at the heart of everything we do, and we tailor our solutions to their needs."
       },
       {
-        "name": "Chandan Nain",
-        "role": "Developer"
+          "name": "Excellence",
+          "description": "We strive for perfection in every project, ensuring top-notch quality and performance."
       },
       {
-        "name": "Ashok",
-        "role": "Digital Manager"
+          "name": "Integrity",
+          "description": "We believe in transparency, honesty, and ethical business practices."
       },
       {
-        "name": "Rinku Bhargava",
-        "role": "Video Editor"
-      },
-      {
-        "name": "Khushi Parashar",
-        "role": "Digital Marketer"
-      },
-      {
-        "name": "Shubham",
-        "role": "Graphics Designer"
-      },
-      {
-        "name": "Taryn Sagar",
-        "role": "Photographer"
+          "name": "Collaboration",
+          "description": "Our team works together seamlessly to bring ideas to life."
       }
-    ],
-    "values": [
+  ],
+  "portfolio_categories": [
+      "Web Development",
+      "Mobile App Development",
+      "Software Solutions",
+      "Brand Identity",
+      "Marketing & Advertising"
+  ],
+  "unique_features": [
       {
-        "name": "Diversity",
-        "description": "We believe in the power of diverse perspectives, backgrounds, and ideas to fuel creativity and innovation."
+          "name": "Custom Solutions",
+          "description": "We provide tailored solutions designed to meet the specific needs of your business."
       },
       {
-        "name": "Efficiencies",
-        "description": "Our commitment to efficiency ensures we maximize resources, time, and energy in delivering top-quality results."
+          "name": "Scalable Architecture",
+          "description": "Our systems are built with scalability in mind, ensuring long-term sustainability."
       },
       {
-        "name": "Teamwork & Collaboration",
-        "description": "Collaboration is at the heart of everything we do."
+          "name": "Data-Driven Decisions",
+          "description": "We leverage analytics and insights to optimize our strategies for maximum impact."
       },
       {
-        "name": "Client Value Creation",
-        "description": "We are dedicated to creating long-term value for our clients by delivering tailored, results-driven strategies."
+          "name": "Agile Development",
+          "description": "Our agile methodologies ensure flexibility, efficiency, and rapid deployment."
+      },
+      {
+          "name": "End-to-End Support",
+          "description": "From ideation to execution, we provide continuous support to help businesses grow."
       }
-    ],
-    "portfolio_categories": [
-      "Graphics Design",
-      "Video Editing",
-      "Animation",
-      "Gaming",
-      "Event Management",
-      "Home Deco"
-    ],
-    "unique_features": [
-      {
-        "name": "Easy Peasy Pricing",
-        "description": "Stop going cross-eyed over complex pricing tiers. Our pricing plans are so easy, a kindergartener could understand them."
-      },
-      {
-        "name": "Unique Design",
-        "description": "There are no cookie-cutter designs here. Your branding, ads, and website will stand out from the competition."
-      },
-      {
-        "name": "Achieve Milestone",
-        "description": "Achieve remarkable milestones with us through creativity, and strategic coordination."
-      }
-    ]
-  }
+  ]
+};

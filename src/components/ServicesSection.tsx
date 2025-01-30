@@ -1,8 +1,7 @@
-"use client"
-
 import { useRef, useEffect, useState } from 'react';
-import { Code, Palette, Globe, Smartphone, Database, Cloud } from 'lucide-react';
+import { Code, Palette, Globe, Smartphone, Database, Cloud, ArrowRight, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import clsx from "clsx";
 
 interface ScrollRevealProps {
@@ -11,11 +10,38 @@ interface ScrollRevealProps {
   className?: string;
 }
 
-interface Service {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}
+export const services = [
+  {
+    icon: <Code size={32} />,
+    title: 'Web Development',
+    description: 'Custom web applications built with cutting-edge technologies.',
+  },
+  {
+    icon: <Smartphone size={32} />,
+    title: 'Mobile Development',
+    description: 'Native and cross-platform mobile applications.',
+  },
+  {
+    icon: <Database size={32} />,
+    title: 'Backend Development',
+    description: 'Scalable and secure backend solutions.',
+  },
+  {
+    icon: <Cloud size={32} />,
+    title: 'Cloud Solutions',
+    description: 'Cloud infrastructure and deployment strategies.',
+  },
+  {
+    icon: <Globe size={32} />,
+    title: 'Digital Strategy',
+    description: 'Comprehensive digital transformation solutions.',
+  },
+  {
+    icon: <Palette size={32} />,
+    title: 'UI/UX Design',
+    description: 'User-centered design and seamless experiences.',
+  },
+];
 
 const ScrollReveal: React.FC<ScrollRevealProps> = ({ children, offset = 200, className }) => {
   const [isActive, setIsActive] = useState(false);
@@ -49,39 +75,6 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({ children, offset = 200, cla
   );
 };
 
-const services: Service[] = [
-  {
-    icon: <Code size={32} />,
-    title: 'Web Development',
-    description: 'Custom web applications built with cutting-edge technologies.',
-  },
-  {
-    icon: <Smartphone size={32} />,
-    title: 'Mobile Development',
-    description: 'Native and cross-platform mobile applications.',
-  },
-  {
-    icon: <Database size={32} />,
-    title: 'Backend Development',
-    description: 'Scalable and secure backend solutions.',
-  },
-  {
-    icon: <Cloud size={32} />,
-    title: 'Cloud Solutions',
-    description: 'Cloud infrastructure and deployment strategies.',
-  },
-  {
-    icon: <Globe size={32} />,
-    title: 'Digital Strategy',
-    description: 'Comprehensive digital transformation solutions.',
-  },
-  {
-    icon: <Palette size={32} />,
-    title: 'UI/UX Design',
-    description: 'User-centered design and seamless experiences.',
-  },
-];
-
 export default function ServicesSection() {
   return (
     <section className="relative min-h-screen w-full px-8 py-2 overflow-hidden bg-black">
@@ -108,14 +101,11 @@ export default function ServicesSection() {
                 { "translate-y-8 opacity-0": !isActive },
                 "flex justify-center mt-2 sm:mt-6 transition-[transform,opacity] duration-[--duration]",
               )}>
-              <div className="
-                relative rounded-full border-2 border-violet-500 px-8 py-2 text-base font-medium
-                bg-black/20 backdrop-blur-sm
-                before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl
-                animate-glow-slow
-              ">
-                Our Services
-              </div>
+              <div className="inline-block rounded-lg bg-black/80 px-4 py-2 backdrop-blur-sm border border-violet-800">
+            <h2 className="text-violet-400 font-medium text-lg tracking-wide drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">
+              Our Services
+            </h2>
+          </div>
             </div>
 
             <h2
@@ -162,9 +152,15 @@ export default function ServicesSection() {
                           <h3 className="text-2xl font-semibold mb-3 group-hover:text-violet-400 transition-colors">
                             {service.title}
                           </h3>
-                          <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
+                          <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors mb-4">
                             {service.description}
                           </p>
+                          <Link
+                            to={`/service/${index}`}
+                            className="inline-flex items-center text-violet-400 hover:text-violet-300 transition-colors"
+                          >
+                            See Details <ArrowRight className="ml-2" size={16} />
+                          </Link>
                         </div>
                       </motion.div>
 
@@ -189,15 +185,41 @@ export default function ServicesSection() {
                           <h3 className="text-2xl font-semibold mb-3 group-hover:text-violet-400 transition-colors">
                             {service.title}
                           </h3>
-                          <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
+                          <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors mb-4">
                             {service.description}
                           </p>
+                          <Link
+                            to={`/service/${index}`}
+                            className="inline-flex items-center text-violet-400 hover:text-violet-300 transition-colors"
+                          >
+                            See Details <ArrowRight className="ml-2" size={16} />
+                          </Link>
                         </div>
                       </div>
                     </>
                   )}
                 </ScrollReveal>
               ))}
+            </div>
+
+            {/* WhatsApp Button */}
+            <div className="mt-20 mb-8 flex justify-center">
+              <a
+                href="https://wa.me/your_number_here"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={clsx(
+                  "group flex items-center gap-2 px-6 py-3 rounded-full",
+                  "bg-gradient-to-r from-green-500 to-green-600",
+                  "hover:from-green-600 hover:to-green-700",
+                  "transition-all duration-300 transform hover:scale-105",
+                  "text-white font-medium shadow-lg",
+                  "shadow-green-500/25 hover:shadow-green-500/40"
+                )}
+              >
+                
+                Chat with us on WhatsApp
+              </a>
             </div>
           </>
         )}

@@ -16,14 +16,11 @@ export function OrbitingCirclesDemo() {
         {/* Title Section from Services Component */}
         <div className="relative z-10 mx-auto max-w-7xl [--duration:800ms] pb-96 ">
           <div className="flex justify-center mt-2 sm:mt-6">
-            <div className="
-              relative rounded-full border-2 border-violet-500 px-8 py-2 text-base font-medium
-              bg-black/20 backdrop-blur-sm
-              before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl
-              animate-glow-slow
-            ">
+          <div className="inline-block rounded-lg bg-black/80 px-4 py-2 backdrop-blur-sm border border-violet-800">
+            <h2 className="text-violet-400 font-medium text-lg tracking-wide drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">
               Tech Stack
-            </div>
+            </h2>
+          </div>
           </div>
         </div>
 

@@ -19,8 +19,7 @@ import FAQSection from './components/FAQ';
 import Footer from './components/Footer';
 import CrossMarquee from './components/CrossMarquee';
 import WhatsAppButton from './components/WhatsaAppButton';
-import Chatbot from './components/chatbot/Chat';
-
+import {Chatbot} from './components/chatbot/Chat'
 function App() {
   return (
     <Router>

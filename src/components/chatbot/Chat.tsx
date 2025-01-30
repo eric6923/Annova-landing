@@ -7,12 +7,18 @@ interface ChatMessage {
   content: string;
 }
 
-const Chatbot = () => {
+interface ServiceInfo {
+  name: string;
+  description: string;
+  subServices: string[];
+}
+
+export const Chatbot = () => {
   const [showOnlineStatus, setShowOnlineStatus] = useState(true);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: "assistant",
-      content: "Hi! How can I help you today?",
+      content: "Hi! I'm the Anovas AI Assistant. How can I help you today?",
     },
   ]);
   const [input, setInput] = useState("");
@@ -40,6 +46,14 @@ const Chatbot = () => {
   const GEMINI_API_KEY = "AIzaSyCRd4RjJB7AuwMKGtj5eaaqIyoAWpU-q8c";
   const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
 
+  const findRelevantService = (query: string): ServiceInfo | null => {
+    const queryLower = query.toLowerCase();
+    return websiteData.services.find(service => 
+      queryLower.includes(service.name.toLowerCase()) ||
+      service.subServices.some(sub => queryLower.includes(sub.toLowerCase()))
+    ) || null;
+  };
+
   const formatContactInfo = (type: string) => {
     if (type === "phone") {
       return `Call us: ${websiteData.company.contact.phones[0]}`;
@@ -48,6 +62,51 @@ const Chatbot = () => {
     } else {
       return `Contact us:\nCall: ${websiteData.company.contact.phones[0]}\nEmail: ${websiteData.company.contact.emails[0]}`;
     }
+  };
+
+  const createContextualPrompt = (userInput: string) => {
+    const relevantService = findRelevantService(userInput);
+    const inputLower = userInput.toLowerCase();
+    
+    let contextualInfo = {
+      companyInfo: websiteData.company.description,
+      relevantService: relevantService ? JSON.stringify(relevantService) : null,
+      values: inputLower.includes('value') ? JSON.stringify(websiteData.values) : null,
+      features: inputLower.includes('feature') ? JSON.stringify(websiteData.unique_features) : null,
+      team: inputLower.includes('team') || inputLower.includes('founder') || inputLower.includes('ceo') ? 
+        JSON.stringify(websiteData.team) : null
+    };
+
+    return `
+You are the AI assistant for ${websiteData.company.name}, a software solutions agency established in ${websiteData.company.established}.
+
+RESPONSE RULES:
+1. Greetings: For "hi", "hello", etc., respond ONLY with "Hi! How can I help you today?"
+2. Contact Information:
+   - Phone request: Return ONLY the phone number with "Call us: " prefix
+   - Email request: Return ONLY the email with "Email us: " prefix
+   - Full contact request: Return both phone and email on separate lines
+3. Response Format:
+   - Maximum 2-3 sentences
+   - Use line breaks for readability
+   - Be professional but friendly
+4. Service Inquiries:
+   - Provide specific service details when asked
+   - Include relevant sub-services
+5. Team Information:
+   - For team inquiries, mention the team member's name and role
+   - For founder/CEO inquiries, mention "${websiteData.team[0].name}, ${websiteData.team[0].role}"
+6. Pricing/Quotes:
+   - Direct to contact team for custom quotes
+   - Never provide specific pricing
+
+Context:
+${JSON.stringify(contextualInfo)}
+
+Current conversation context:
+${messages.slice(-3).map(m => `${m.role}: ${m.content}`).join('\n')}
+
+User input: ${userInput}`;
   };
 
   const sendMessage = async (userInput: string) => {
@@ -62,26 +121,7 @@ const Chatbot = () => {
     setIsLoading(true);
 
     try {
-      const prompt = `
-You are the chatbot for ${websiteData.company.name}'s website.
-
-RESPONSE RULES:
-1. If user says "hi" or similar greeting, respond ONLY with "How can I help you today?"
-2. For contact information:
-   - If they ask for phone: Only provide the primary phone
-   - If they ask for email: Only provide the primary email
-   - If they ask for all contact: Provide primary phone and email in separate lines
-3. Keep all responses under 2 sentences
-4. Use line breaks to make information more readable
-
-Company Info:
-${JSON.stringify({
-  description: websiteData.company.description,
-  services: websiteData.services.map((s) => s.name),
-  contact: websiteData.company.contact,
-})}
-
-User input: ${userInput}`;
+      const prompt = createContextualPrompt(userInput);
 
       const response = await fetch(`${API_URL}?key=${GEMINI_API_KEY}`, {
         method: "POST",
@@ -94,12 +134,19 @@ User input: ${userInput}`;
               parts: [{ text: prompt }],
             },
           ],
+          generationConfig: {
+            temperature: 0.7,
+            topP: 0.8,
+            topK: 40,
+            maxOutputTokens: 200,
+          },
         }),
       });
 
       const data = await response.json();
       let responseContent = data.candidates[0].content.parts[0].text;
 
+      // Handle contact information formatting
       if (responseContent.includes("contact") && responseContent.includes("phone")) {
         responseContent = formatContactInfo("all");
       } else if (responseContent.includes("phone")) {
@@ -117,7 +164,7 @@ User input: ${userInput}`;
       console.error("Error:", error);
       const errorMessage: ChatMessage = {
         role: "assistant",
-        content: "Please contact us:\nCall: +91 93508 51909\nEmail: totemmangement@gmail.com",
+        content: "I apologize, but I'm having trouble connecting right now. Please contact us directly:\nCall: +91 79921 93730\nEmail: weanovas@gmail.com",
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
@@ -137,22 +184,6 @@ User input: ${userInput}`;
             <Bot className="w-8 h-8 text-white group-hover:scale-110 transition-transform duration-300" />
             <span className="absolute top-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-white rounded-full"></span>
           </button>
-          {/* {showOnlineStatus && (
-            <div className="absolute bottom-full right-0 mb-3 transform-gpu animate-fadeIn">
-              <div className="bg-white rounded-2xl shadow-lg px-4 py-3 mr-2">
-                <div className="flex items-center gap-2">
-                  <span className="flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                  </span>
-                  <p className="text-sm font-medium bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
-                    Live Chat Available
-                  </p>
-                </div>
-              </div>
-              <div className="absolute bottom-0 right-4 transform translate-y-1/2 rotate-45 w-3 h-3 bg-white"></div>
-            </div>
-          )} */}
         </div>
       )}
 
@@ -257,5 +288,3 @@ User input: ${userInput}`;
     </div>
   );
 };
-
-export default Chatbot;
