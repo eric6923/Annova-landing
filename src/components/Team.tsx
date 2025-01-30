@@ -93,13 +93,13 @@ function App() {
       </div>
 
       {/* Header */}
-      <ScrollReveal offset={200} className="relative z-10 pt-12 md:pt-20 pb-6 md:pb-10 px-4 md:px-6 text-center [--duration:800ms]">
+      <ScrollReveal offset={200} className="relative z-10 pt-4 md:pt-20 pb-6 md:pb-10 px-4 md:px-6 text-center [--duration:800ms]">
         {(isActive) => (
           <>
             <div
         className={clsx(
           { "translate-y-8 opacity-0": !isActive },
-          "flex justify-center mt-2 sm:mt-6 transition-[transform,opacity] duration-[--duration]",
+          "flex justify-center  sm:mt-6 transition-[transform,opacity] duration-[--duration]",
         )}>
         <div className="inline-block rounded-lg bg-black/80 px-4 py-2 backdrop-blur-sm border border-violet-800 mb-6">
             <h2 className="text-violet-400 font-medium text-lg tracking-wide drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">

@@ -56,7 +56,7 @@ function App() {
       <div className="max-w-5xl mx-auto w-full">
         {/* Header Section */}
         {/* Header Section */}
-<div className="text-center mb-10">
+<div className="text-center mb-10 mt-8">
   <div className="flex justify-center">
   <div className="inline-block rounded-lg bg-black/80 px-4 py-2 backdrop-blur-sm border border-violet-800">
             <h2 className="text-violet-400 font-medium text-lg tracking-wide drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">

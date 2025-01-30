@@ -197,7 +197,7 @@ export default function WhyChooseUsSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-[90rem] pt-20 pb-10 px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-[90rem]  pb-10 px-4 sm:px-6 lg:px-8">
         {/* Desktop-only header */}
         <div className="hidden lg:block">
           <div className="flex justify-center mb-8 md:mb-16">
