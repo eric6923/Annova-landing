@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Volume2, VolumeX } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Volume2, VolumeX, Play, Pause } from 'lucide-react';
 import video from './assets/test1.mp4'
 
 interface Testimonial {
@@ -40,7 +40,8 @@ const testimonials: Testimonial[] = [
 
 const Testimonials: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const next = () => {
@@ -59,6 +60,17 @@ const Testimonials: React.FC = () => {
     if (videoRef.current) {
       videoRef.current.muted = !videoRef.current.muted;
       setIsMuted(!isMuted);
+    }
+  };
+
+  const togglePlayPause = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
     }
   };
 
@@ -86,7 +98,7 @@ const Testimonials: React.FC = () => {
                 ref={videoRef}
                 autoPlay
                 loop
-                muted
+                muted={isMuted}
                 playsInline
                 className="absolute inset-0 w-full h-full object-cover"
               >
@@ -94,13 +106,22 @@ const Testimonials: React.FC = () => {
               </video>
               <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/20" />
               
-              {/* Mute Button - Now positioned top left */}
+              {/* Mute Button */}
               <button
                 onClick={toggleMute}
                 className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-colors"
                 aria-label={isMuted ? "Unmute video" : "Mute video"}
               >
                 {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+              </button>
+
+              {/* Bottom Play/Pause Button */}
+              <button
+                onClick={togglePlayPause}
+                className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                aria-label={isPlaying ? "Pause video" : "Play video"}
+              >
+                {isPlaying ? <Pause size={18} /> : <Play size={18} />}
               </button>
             </div>
 

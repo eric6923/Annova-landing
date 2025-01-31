@@ -13,33 +13,39 @@ interface ScrollRevealProps {
 export const services = [
   {
     icon: <Code size={32} />,
-    title: 'Web Development',
-    description: 'Custom web applications built with cutting-edge technologies.',
+    title: 'Software Development',
+    description: 'Custom web applications solutions.',
+    path: '/software'
   },
   {
     icon: <Smartphone size={32} />,
     title: 'Mobile Development',
     description: 'Native and cross-platform mobile applications.',
+    path: '/mobile'
   },
   {
     icon: <Database size={32} />,
-    title: 'Backend Development',
-    description: 'Scalable and secure backend solutions.',
+    title: 'AI Solutions',
+    description: 'Scalable and secure AI solutions.',
+    path: '/ai'
   },
   {
     icon: <Cloud size={32} />,
-    title: 'Cloud Solutions',
-    description: 'Cloud infrastructure and deployment strategies.',
+    title: 'Branding',
+    description: 'Crafting memorable branding experiences',
+    path: '/branding'
   },
   {
     icon: <Globe size={32} />,
-    title: 'Digital Strategy',
-    description: 'Comprehensive digital transformation solutions.',
+    title: 'Social Media Marketing',
+    description: 'Building engaging social presence',
+    path: '/social'
   },
   {
     icon: <Palette size={32} />,
-    title: 'UI/UX Design',
-    description: 'User-centered design and seamless experiences.',
+    title: 'Ads Creation',
+    description: 'Crafting impactful Ad Campaigns',
+    path: '/ads'
   },
 ];
 
@@ -102,10 +108,10 @@ export default function ServicesSection() {
                 "flex justify-center mt-2 sm:mt-6 transition-[transform,opacity] duration-[--duration]",
               )}>
               <div className="inline-block rounded-lg bg-black/80 px-4 py-2 backdrop-blur-sm border border-violet-800">
-            <h2 className="text-violet-400 font-medium text-lg tracking-wide drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">
-              Our Services
-            </h2>
-          </div>
+                <h2 className="text-violet-400 font-medium text-lg tracking-wide drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">
+                  Our Services
+                </h2>
+              </div>
             </div>
 
             <h2
@@ -156,7 +162,7 @@ export default function ServicesSection() {
                             {service.description}
                           </p>
                           <Link
-                            to={`/service/${index}`}
+                            to={service.path}
                             className="inline-flex items-center text-violet-400 hover:text-violet-300 transition-colors"
                           >
                             See Details <ArrowRight className="ml-2" size={16} />
@@ -189,7 +195,7 @@ export default function ServicesSection() {
                             {service.description}
                           </p>
                           <Link
-                            to={`/service/${index}`}
+                            to={service.path}
                             className="inline-flex items-center text-violet-400 hover:text-violet-300 transition-colors"
                           >
                             See Details <ArrowRight className="ml-2" size={16} />
@@ -217,7 +223,6 @@ export default function ServicesSection() {
                   "shadow-green-500/25 hover:shadow-green-500/40"
                 )}
               >
-                
                 Chat with us on WhatsApp
               </a>
             </div>
