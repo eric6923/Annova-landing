@@ -4,6 +4,9 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontFamily:{
+        secondary: ['Poppins', 'sans-serif'], 
+      },
       colors: {
         violet: {
           '50': '#f5f3ff',

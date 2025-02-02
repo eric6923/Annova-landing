@@ -102,7 +102,7 @@ function App() {
           "flex justify-center  sm:mt-6 transition-[transform,opacity] duration-[--duration]",
         )}>
         <div className="inline-block rounded-lg bg-black/80 px-4 py-2 backdrop-blur-sm border border-violet-800 mb-6">
-            <h2 className="text-violet-400 font-medium text-lg tracking-wide drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">
+            <h2 className="text-violet-400 font-secondary font-medium text-lg tracking-wide drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">
               Our Team
             </h2>
           </div>
@@ -113,7 +113,7 @@ function App() {
                 { "translate-y-8 opacity-0": !isActive },
                 "text-4xl md:text-5xl font-bold transition-[transform,opacity] duration-[--duration]",
                 "bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent",
-                "leading-[1.15] md:leading-[1.3] font-sans"
+                "leading-[1.15] md:leading-[1.3] font-secondary"
               )}>
               Meet Our Team
             </h2>
@@ -121,7 +121,7 @@ function App() {
             <p
               className={clsx(
                 { "translate-y-8 opacity-0": !isActive },
-                "mt-4 text-violet-200 max-w-2xl mx-auto text-base md:text-lg transition-[transform,opacity] duration-[--duration]",
+                "mt-4 text-violet-200 font-secondary max-w-2xl mx-auto text-base md:text-lg transition-[transform,opacity] duration-[--duration]",
               )}>
               Meet our exceptional team of dedicated professionals driving innovation forward
             </p>

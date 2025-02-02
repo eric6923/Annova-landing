@@ -67,13 +67,13 @@ const Header = () => {
               {/* Desktop Navigation */}
               <div className="hidden font-bold md:flex items-center space-x-8">
                 <NavLink onClick={() => scrollToSection('services')}>
-                  Services
+                  Home
                 </NavLink>
                 <NavLink onClick={() => scrollToSection('portfolio')}>
-                  Portfolio
+                  Services
                 </NavLink>
                 <NavLink onClick={() => scrollToSection('faq')}>
-                  FAQs
+                  Testimonials
                 </NavLink>
                 <motion.button
                   whileHover={{ scale: 1.05 }}

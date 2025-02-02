@@ -80,11 +80,11 @@ const Testimonials: React.FC = () => {
         {/* Testimonial Header */}
         <div className="text-center mb-8 lg:mb-12">
           <div className="inline-block rounded-lg bg-black/80 px-4 py-2 backdrop-blur-sm border border-violet-800">
-            <h2 className="text-violet-400 font-medium text-lg tracking-wide drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">
+            <h2 className="text-violet-400 font-medium font-secondary text-lg tracking-wide drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">
               Our Testimonials
             </h2>
           </div>
-          <h2 className="mt-6 text-center font-display text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent leading-[1.15] md:leading-[1.3]">
+          <h2 className="mt-6 text-center font-secondary font-display text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent leading-[1.15] md:leading-[1.3]">
             Real Stories, Real Voices
           </h2>
         </div>
@@ -144,11 +144,11 @@ const Testimonials: React.FC = () => {
             </div>
 
             {/* Name and Designation - Overlaid on image for desktop, visible on mobile */}
-            <div className="text-center lg:hidden mb-6">
-              <h3 className="text-xl font-semibold text-white mb-1">
+            <div className="text-center lg:hidden mb-6 font-secondary">
+              <h3 className="text-xl  text-white mb-1">
                 {testimonials[currentIndex].name}
               </h3>
-              <p className="text-sm text-white/60">
+              <p className="text-sm text-white/60 font-secondary">
                 {testimonials[currentIndex].role} {testimonials[currentIndex].company}
               </p>
             </div>

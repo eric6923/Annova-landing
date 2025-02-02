@@ -81,13 +81,13 @@ const ScrollStackCards = () => {
       <div className="sticky top-0  pb-10 px-4 bg-black">
         <div className="flex justify-center mb-8">
         <div className="inline-block rounded-lg bg-black/80 px-4 py-2 backdrop-blur-sm border border-violet-800">
-            <h2 className="text-violet-400 font-medium text-lg tracking-wide drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">
+            <h2 className="text-violet-400 font-medium font-secondary text-lg tracking-wide drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">
               Why Choose Us
             </h2>
           </div>
         </div>
 
-        <h2 className="text-center font-display text-3xl font-bold bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent mb-10 px-4">
+        <h2 className="text-center font-display font-secondary text-3xl font-bold bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent mb-4 px-4">
           Your Success, Our Priority
         </h2>
       </div>
@@ -201,12 +201,12 @@ export default function WhyChooseUsSection() {
         {/* Desktop-only header */}
         <div className="hidden lg:block">
           <div className="flex justify-center mb-8 md:mb-16">
-            <div className="relative rounded-full border-2 border-violet-500 px-6 sm:px-8 py-2 text-sm sm:text-base font-medium bg-black/20 backdrop-blur-sm before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl animate-glow-slow">
+            <div className="relative rounded-full border-2 border-violet-500 px-6 sm:px-8 py-2 text-sm sm:text-base font-medium bg-black/20 backdrop-blur-sm before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-violet-500/20 before:blur-xl animate-glow-slow font-secondary">
               Why Choose Us
             </div>
           </div>
 
-          <h2 className="text-center font-display text-3xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent mb-10 md:mb-20 px-4">
+          <h2 className="text-center font-secondary text-3xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent mb-10 md:mb-20 px-4">
             Your Success, Our Priority
           </h2>
         </div>

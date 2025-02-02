@@ -104,7 +104,7 @@ const WorkedWith: React.FC = () => {
                 "flex justify-center mt-2 sm:mt-6 transition-[transform,opacity] duration-[--duration]",
               )}>
               <div className="inline-block rounded-lg bg-black/80 px-4 py-2 backdrop-blur-sm border border-violet-800">
-            <h2 className="text-violet-400 font-medium text-lg tracking-wide drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">
+            <h2 className="text-violet-400 font-medium text-lg tracking-wide drop-shadow-[0_0_8px_rgba(139,92,246,0.5)] font-secondary">
               Worked With
             </h2>
           </div>
@@ -115,7 +115,7 @@ const WorkedWith: React.FC = () => {
                 { "translate-y-8 opacity-0": !isActive },
                 "mt-6 text-center font-display text-3xl sm:text-4xl md:text-5xl font-bold transition-[transform,opacity] duration-[--duration]",
                 "bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent",
-                "leading-[1.15] md:leading-[1.3]"
+                "leading-[1.15] md:leading-[1.3] font-secondary"
               )}>
               Our Collaborative Journey
             </h2>
@@ -123,7 +123,7 @@ const WorkedWith: React.FC = () => {
             <p
               className={clsx(
                 { "translate-y-8 opacity-0": !isActive },
-                "mt-6 text-center text-gray-400 max-w-2xl mx-auto px-4 transition-[transform,opacity] duration-[--duration]",
+                "mt-6 text-center font-secondary text-gray-400 max-w-2xl mx-auto px-4 transition-[transform,opacity] duration-[--duration]",
               )}>
               Empowering businesses through strategic partnerships and innovative solutions.
             </p>

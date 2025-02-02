@@ -79,7 +79,7 @@ function App() {
         <div className="relative z-10 mx-auto max-w-7xl [--duration:800ms] pb-20">
           <div className="flex justify-center mt-2 sm:mt-6">
             <div className="inline-block rounded-lg bg-black/80 px-4 py-2 backdrop-blur-sm border border-violet-800">
-              <h2 className="text-violet-400 font-medium text-lg tracking-wide drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">
+              <h2 className="text-violet-400 font-secondary font-medium text-lg tracking-wide drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">
                 FAQ
               </h2>
             </div>

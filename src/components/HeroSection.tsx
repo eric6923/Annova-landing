@@ -146,11 +146,11 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
           <motion.div className="relative inline-block">
             <motion.h1 
               variants={itemVariants}
-              className="text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-tight"
+              className="text-4xl sm:text-5xl md:text-7xl font-bold  text-white leading-tight"
             >
               Transforming Ideas into
               <span className="relative group">
-                <span className="bg-gradient-to-r from-violet-300 via-violet-400 to-violet-200 text-transparent bg-clip-text"> Digital Reality</span>
+                <span className="bg-gradient-to-r from-violet-300 via-violet-400 to-violet-200 text-transparent bg-clip-text "> Digital Reality</span>
                 
                 {/* Doodle Art Circle */}
                 <svg 
@@ -172,7 +172,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
 
           <motion.p 
             variants={itemVariants}
-            className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto px-4"
+            className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto px-4 font-secondary"
           >
             We craft exceptional digital experiences that elevate brands and drive success through innovative solutions and cutting-edge technology.
           </motion.p>
@@ -185,7 +185,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
               variants={buttonVariants}
               whileHover="hover"
               whileTap="tap"
-              className="group w-3/4 sm:w-auto px-6 md:px-8 py-3 md:py-4 text-base font-bold bg-violet-600 hover:bg-violet-700 text-white rounded-xl flex items-center justify-center gap-2 transition-all"
+              className="group w-3/4 sm:w-auto px-6 md:px-8 py-3 md:py-4 text-base font-bold font- bg-violet-600 hover:bg-violet-700 text-white rounded-xl flex items-center justify-center gap-2 transition-all"
             >
               <span>Get Started</span>
               <ArrowRight size={20} />
