@@ -123,9 +123,9 @@ const WorkedWith: React.FC = () => {
               {stats.map((stat, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isActive ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="relative"
                 >
                   <div
@@ -173,35 +173,42 @@ const WorkedWith: React.FC = () => {
 
                     {/* Content */}
                     <div className="relative px-8 py-12 flex flex-col justify-between min-h-[250px]">
-                      {/* Number */}
-                      <div className="framer-b3es2q" style={{ outline: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0, transform: 'none', opacity: 1 }}>
-                        <h3 
+                      {/* Number with CountUp */}
+                      <div className="framer-b3es2q">
+                        <motion.h3 
+                          initial={{ opacity: 0, scale: 0.5 }}
+                          animate={isActive ? { opacity: 1, scale: 1 } : {}}
+                          transition={{ duration: 0.5, delay: index * 0.2 }}
                           className={`text-[72px] leading-none font-medium ${
                             stat.darkText ? 'text-black' : 'text-white'
                           }`}
-                          style={{ 
-                            margin: 0,
-                            fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif'
-                          }}
                         >
-                          <CountUp 
-                            end={stat.number} 
-                            duration={2} 
-                            suffix="+" 
-                          />
-                        </h3>
+                          {isActive ? (
+                            <CountUp
+                              start={0}
+                              end={stat.number}
+                              duration={2}
+                              suffix="+"
+                              useEasing={true}
+                              delay={index * 0.2}
+                            />
+                          ) : (
+                            "0+"
+                          )}
+                        </motion.h3>
                       </div>
 
                       {/* Label and Description */}
-                      <div className="flex flex-col gap-1 text-right">
+                      <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isActive ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.5, delay: index * 0.3 }}
+                        className="flex flex-col gap-1 text-right"
+                      >
                         <p 
-                          className={`text-base font-medium ${
+                          className={`text-lg font-medium ${
                             stat.darkText ? 'text-black' : 'text-white'
                           }`}
-                          style={{ 
-                            margin: 0,
-                            fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif'
-                          }}
                         >
                           {stat.label}
                         </p>
@@ -209,14 +216,10 @@ const WorkedWith: React.FC = () => {
                           className={`text-lg font-semibold ${
                             stat.darkText ? 'text-black/60' : 'text-white/60'
                           }`}
-                          style={{ 
-                            margin: 0,
-                            fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif'
-                          }}
                         >
                           {stat.description}
                         </p>
-                      </div>
+                      </motion.div>
                     </div>
                   </div>
                 </motion.div>

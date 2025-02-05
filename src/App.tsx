@@ -23,13 +23,14 @@ const Home = () => {
     <>
       <main className="space-y-16 md:space-y-24">
         <HeroSection />
+        <ProjectMarquee/>
         <ServicesSection />
         
         <WhyChooseUs />
         <WorkedWith />
         <Portfolio />
         <OurProcess />
-        <ProjectMarquee/>
+        
         <Testimonials />
         <Team />
         <OrbitingCirclesDemo/> 
@@ -60,8 +61,8 @@ function App() {
           </motion.div>
         </AnimatePresence>
         <Footer />
-        <WhatsAppButton/>
-        <Chatbot/>
+        {/* <WhatsAppButton/>
+        <Chatbot/> */}
       </div>
     </Router>
   );

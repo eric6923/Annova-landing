@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import profile from './profile.jpg'
+import profile from './profile.jpg';
+import Home from '../components/assets/home.png'
+import Privacy from '../components/assets/privacy2.png'
+import WhatsAppButton from '../components/assets/whatsapp.png';
+import voice from '../components/assets/voice3.png'
+
 interface NavLinkProps {
   children: React.ReactNode;
   onClick: () => void;
@@ -9,15 +14,21 @@ interface NavLinkProps {
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [showMainHeader, setShowMainHeader] = useState(true);
+  const [showBottomNav, setShowBottomNav] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      setShowMainHeader(currentScrollY <= 0 || currentScrollY < lastScrollY);
+      setShowBottomNav(currentScrollY > 100);
+      setLastScrollY(currentScrollY);
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -34,110 +45,175 @@ const Header = () => {
   };
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed w-full top-0 z-50 px-4 sm:px-6 lg:px-8 transition-all duration-300`}
-    >
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          className={`my-4 rounded-2xl backdrop-blur-xl ${
-            isScrolled 
-              ? 'bg-gray-800/60 shadow-lg' 
-              : 'bg-gray-800/40'
-          } transition-all duration-300`}
-        >
-          <nav className="px-4 py-3">
-            <div className="flex items-center justify-between">
-              {/* Logo and Company Name */}
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="flex-shrink-0 flex items-center space-x-3"
-              >
-                <img
-                  src={profile}
-                  alt="Logo"
-                  className="h-9 w-auto rounded-full"
-                />
-                <span className="text-white font-bold text-xl tracking-tight bg-gradient-to-r from-violet-400 to-violet-200 bg-clip-text text-transparent">
-                  Anovas
-                </span>
-              </motion.div>
-
-              {/* Desktop Navigation */}
-              <div className="hidden font-bold md:flex items-center space-x-8">
-                <NavLink onClick={() => scrollToSection('services')}>
-                  Home
-                </NavLink>
-                <NavLink onClick={() => scrollToSection('portfolio')}>
-                  Services
-                </NavLink>
-                <NavLink onClick={() => scrollToSection('faq')}>
-                  Testimonials
-                </NavLink>
-                <motion.button
+    <>
+      {/* Main Header */}
+      <motion.header
+        initial={{ y: 0 }}
+        animate={{ y: showMainHeader ? 0 : -100 }}
+        transition={{ duration: 0.3 }}
+        className="fixed w-full top-0 z-40 px-4 sm:px-6 lg:px-8"
+      >
+        <div className="max-w-7xl mx-auto">
+          <motion.div className="my-4 rounded-2xl backdrop-blur-xl bg-gray-800/60 shadow-lg">
+            <nav className="px-4 py-3">
+              <div className="flex items-center justify-between">
+                {/* Logo and Company Name */}
+                <motion.div
                   whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => scrollToSection('contact')}
-                  className="bg-violet-600/90 hover:bg-violet-500 text-white px-6 py-2 
-                    rounded-full text-sm font-medium transition-colors duration-300
-                    shadow-lg hover:shadow-violet-500/25"
+                  className="flex-shrink-0 flex items-center space-x-3"
                 >
-                  Contact Us
+                  <img
+                    src={profile}
+                    alt="Logo"
+                    className="h-9 w-auto rounded-full"
+                  />
+                  <span className="text-white font-bold text-xl tracking-tight bg-gradient-to-r from-violet-400 to-violet-200 bg-clip-text text-transparent">
+                    Anovas
+                  </span>
+                </motion.div>
+
+                {/* Desktop Navigation */}
+                <div className="hidden font-bold md:flex items-center space-x-8">
+                  <NavLink onClick={() => scrollToSection('services')}>
+                    Home
+                  </NavLink>
+                  <NavLink onClick={() => scrollToSection('portfolio')}>
+                    Services
+                  </NavLink>
+                  <NavLink onClick={() => scrollToSection('faq')}>
+                    Testimonials
+                  </NavLink>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => scrollToSection('contact')}
+                    className="bg-violet-600/90 hover:bg-violet-500 text-white px-6 py-2 
+                      rounded-full text-sm font-medium transition-colors duration-300
+                      shadow-lg hover:shadow-violet-500/25"
+                  >
+                    Contact Us
+                  </motion.button>
+                </div>
+
+                {/* Mobile Menu Button */}
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className="md:hidden p-1.5 rounded-lg text-gray-300 hover:text-violet-400 
+                    hover:bg-gray-700/50 focus:outline-none"
+                >
+                  {isMenuOpen ? (
+                    <X className="h-5 w-5" />
+                  ) : (
+                    <Menu className="h-5 w-5" />
+                  )}
                 </motion.button>
               </div>
 
-              {/* Mobile Menu Button */}
-              <motion.button
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden p-1.5 rounded-lg text-gray-300 hover:text-violet-400 
-                  hover:bg-gray-700/50 focus:outline-none"
-              >
-                {isMenuOpen ? (
-                  <X className="h-5 w-5" />
-                ) : (
-                  <Menu className="h-5 w-5" />
+              {/* Mobile Navigation */}
+              <AnimatePresence>
+                {isMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="md:hidden mt-3"
+                  >
+                    <div className="space-y-1 pt-2 pb-3 border-t border-gray-700/50">
+                      <MobileNavLink onClick={() => scrollToSection('services')}>
+                        Services
+                      </MobileNavLink>
+                      <MobileNavLink onClick={() => scrollToSection('portfolio')}>
+                        Portfolio
+                      </MobileNavLink>
+                      <MobileNavLink onClick={() => scrollToSection('faq')}>
+                        FAQs
+                      </MobileNavLink>
+                      <motion.button
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => scrollToSection('contact')}
+                        className="w-full text-left px-3 py-2 text-sm font-medium text-white 
+                          bg-violet-600/90 hover:bg-violet-500 rounded-lg transition-colors duration-300"
+                      >
+                        Contact Us
+                      </motion.button>
+                    </div>
+                  </motion.div>
                 )}
+              </AnimatePresence>
+            </nav>
+          </motion.div>
+        </div>
+      </motion.header>
+
+      {/* Bottom Navigation Bar */}
+      <motion.div
+        initial={{ y: 100 }}
+        animate={{ y: showBottomNav ? 0 : 100 }}
+        transition={{ duration: 0.3 }}
+        className="fixed w-full bottom-0 z-50 px-4 sm:px-6 lg:px-8"
+      >
+        <div className="max-w-7xl mx-auto">
+          <div className="my-4 rounded-2xl backdrop-blur-xl bg-gray-800/60 shadow-lg">
+            <div className="flex items-center justify-around px-4 py-3">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => scrollToSection('home')}
+                className="flex flex-col items-center text-gray-200 hover:text-violet-400 transition-colors duration-300"
+              >
+                <img
+                  src={Home}
+                  alt="Home"
+                  className="w-10 h-10 object-cover"
+                />
+                {/* <span className="text-xs mt-1">Home</span> */}
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => window.open('https://wa.me/7992193730', '_blank')}
+                className="flex flex-col items-center text-gray-200 hover:text-violet-400 transition-colors duration-300"
+              >
+                <img
+                  src={WhatsAppButton}
+                  alt="Chat"
+                  className="w-10 h-10 object-cover"
+                />
+                
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => scrollToSection('privacy')}
+                className="flex flex-col items-center text-gray-200 hover:text-violet-400 transition-colors duration-300"
+              >
+                <img
+                  src={Privacy}
+                  alt="Privacy"
+                  className="w-10 h-10 object-cover"
+                />
+                {/* <span className="text-xs mt-1">Privacy</span> */}
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => scrollToSection('voice-agent')}
+                className="flex flex-col items-center text-gray-200 hover:text-violet-400 transition-colors duration-300"
+              >
+                <img
+                  src={voice}
+                  alt="Voice"
+                  className="w-10 h-10 object-cover"
+                />
+                {/* <span className="text-xs mt-1">Voice</span> */}
               </motion.button>
             </div>
-
-            {/* Mobile Navigation */}
-            <AnimatePresence>
-              {isMenuOpen && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="md:hidden mt-3"
-                >
-                  <div className="space-y-1 pt-2 pb-3 border-t border-gray-700/50">
-                    <MobileNavLink onClick={() => scrollToSection('services')}>
-                      Services
-                    </MobileNavLink>
-                    <MobileNavLink onClick={() => scrollToSection('portfolio')}>
-                      Portfolio
-                    </MobileNavLink>
-                    <MobileNavLink onClick={() => scrollToSection('faq')}>
-                      FAQs
-                    </MobileNavLink>
-                    <motion.button
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => scrollToSection('contact')}
-                      className="w-full text-left px-3 py-2 text-sm font-medium text-white 
-                        bg-violet-600/90 hover:bg-violet-500 rounded-lg transition-colors duration-300"
-                    >
-                      Contact Us
-                    </motion.button>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </nav>
-        </motion.div>
-      </div>
-    </motion.header>
+          </div>
+        </div>
+      </motion.div>
+    </>
   );
 };
 

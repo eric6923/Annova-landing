@@ -1,5 +1,5 @@
 import { ArrowRight, Sparkles } from 'lucide-react';
-import { motion, useAnimation, useInView, useScroll, useTransform, Variants, MotionValue, cubicBezier } from 'framer-motion';
+import { motion, useAnimation, useInView, useScroll, useTransform, Variants, cubicBezier } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
 interface HeroSectionProps {
@@ -9,6 +9,7 @@ interface HeroSectionProps {
 const HeroSection: React.FC<HeroSectionProps> = () => {
   const controls = useAnimation();
   const ref = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
   const [isHovered, setIsHovered] = useState<boolean>(false);
   
@@ -19,18 +20,10 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
 
   const customEasing = cubicBezier(0.215, 0.610, 0.355, 1.000);
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"], {
-    ease: customEasing
-  });
+  // Modified scroll-based animations with slower fade
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 0.5], [0, 50]);
   
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0], {
-    ease: customEasing
-  });
-  
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.5], {
-    ease: customEasing
-  });
-
   useEffect(() => {
     if (isInView) {
       controls.start('visible');
@@ -80,13 +73,11 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
   return (
     <motion.section 
       ref={ref} 
-      style={{ opacity }}
       className="relative min-h-screen bg-gradient-to-b from-black via-violet-950 to-black overflow-hidden perspective-1000"
     >
       {/* Background Elements */}
       <motion.div 
         className="absolute inset-0"
-        style={{ y, scale }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
@@ -128,14 +119,14 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
         </div>
       </motion.div>
 
-      {/* Main Content */}
+      {/* Main Content - Now with slower fade animation */}
       <motion.div 
-        className="container mx-auto px-4 md:px-6 pt-40 sm:pt-48 md:pt-52 pb-12 md:pb-20 relative z-10"
+        ref={contentRef}
         style={{ 
-          y: useTransform(scrollYProgress, [0, 1], ["0%", "100%"], {
-            ease: customEasing
-          })
+          opacity: contentOpacity,
+          y: contentY
         }}
+        className="container mx-auto px-4 md:px-6 pt-40 sm:pt-48 md:pt-52 pb-12 md:pb-20 relative z-10"
       >
         <motion.div 
           variants={containerVariants}
@@ -146,11 +137,11 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
           <motion.div className="relative inline-block">
             <motion.h1 
               variants={itemVariants}
-              className="text-4xl sm:text-5xl md:text-7xl font-bold  text-white leading-tight"
+              className="text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-tight"
             >
               Transforming Ideas into
               <span className="relative group">
-                <span className="bg-gradient-to-r from-violet-300 via-violet-400 to-violet-200 text-transparent bg-clip-text "> Digital Reality</span>
+                <span className="bg-gradient-to-r from-violet-300 via-violet-400 to-violet-200 text-transparent bg-clip-text"> Digital Reality</span>
                 
                 {/* Doodle Art Circle */}
                 <svg 

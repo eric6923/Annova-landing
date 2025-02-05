@@ -9,7 +9,7 @@ const MarqueeContent = () => (
   </div>
 );
 
-const CrossMarquee: React.FC = () => {
+const CrossMarquee = () => {
   const gradientStyle = {
     background: `linear-gradient(90deg, 
       rgb(139, 92, 246) 0%,
@@ -22,9 +22,9 @@ const CrossMarquee: React.FC = () => {
 
   return (
     <div className="bg-black/95 relative">
-      <div className="py-6 sm:py-20 overflow-hidden relative w-screen">
+      <div className="py-12 sm:py-20 overflow-hidden relative w-screen">
         {/* Top Marquee */}
-        <div className="relative flex overflow-x-hidden -rotate-[12deg] sm:-rotate-6 scale-100 sm:scale-125 translate-y-12 sm:translate-y-8 w-[150%] sm:w-full -ml-[25%] sm:ml-0">
+        <div className="relative flex overflow-x-hidden -rotate-[12deg] sm:-rotate-6 scale-110 sm:scale-125 translate-y-5 sm:translate-y-8 w-[150%] sm:w-full -ml-[25%] sm:ml-0">
           <div style={gradientStyle} className="animate-marquee-left whitespace-nowrap flex items-center py-3 sm:py-4 shadow-lg shadow-violet-500/20 backdrop-blur-sm">
             {[...Array(6)].map((_, i) => (
               <div key={`top-${i}`} className="flex items-center mx-3 sm:mx-6 group transition-all duration-300 hover:scale-105">
@@ -42,7 +42,7 @@ const CrossMarquee: React.FC = () => {
         </div>
 
         {/* Bottom Marquee */}
-        <div className="relative flex overflow-x-hidden rotate-[12deg] sm:rotate-6 scale-100 sm:scale-125  sm:-translate-y-8 w-[150%] sm:w-full -ml-[25%] sm:ml-0">
+        <div className="relative flex overflow-x-hidden rotate-[12deg] sm:rotate-6 scale-110 sm:scale-125 -translate-y-6 sm:-translate-y-8 w-[150%] sm:w-full -ml-[25%] sm:ml-0">
           <div style={gradientStyle} className="animate-marquee-right whitespace-nowrap flex items-center py-3 sm:py-4 shadow-lg shadow-violet-500/20 backdrop-blur-sm">
             {[...Array(6)].map((_, i) => (
               <div key={`bottom-${i}`} className="flex items-center mx-3 sm:mx-6 group transition-all duration-300 hover:scale-105">
