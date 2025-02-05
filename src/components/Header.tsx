@@ -9,7 +9,7 @@ import WhatsAppButton from '../components/assets/whatsapp.png';
 import voice from '../components/assets/voice3.png'
 
 // Vapi configuration
-const VAPI_KEY = "780f41e6-95c2-443b-ad1a-6cde19413a83";
+const VAPI_KEY = "02e3b5c0-816c-4628-a328-d73933a9bc60";
 const vapi = new Vapi(VAPI_KEY);
 
 const assistantOptions = {
