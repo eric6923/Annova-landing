@@ -1,11 +1,45 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Vapi from "@vapi-ai/web";
 import profile from './profile.jpg';
 import Home from '../components/assets/home.png'
 import Privacy from '../components/assets/privacy2.png'
 import WhatsAppButton from '../components/assets/whatsapp.png';
 import voice from '../components/assets/voice3.png'
+
+// Vapi configuration
+const VAPI_KEY = "780f41e6-95c2-443b-ad1a-6cde19413a83";
+const vapi = new Vapi(VAPI_KEY);
+
+const assistantOptions = {
+  name: "FRIDAY",
+  firstMessage: "Hello and welcome to Anovas, I'm your virtual assistant, So How can I assist you today?",
+  transcriber: {
+    provider: "deepgram",
+    model: "nova-2",
+    language: "en-US",
+  },
+  voice: {
+    provider: "playht",
+    voiceId: "jennifer",
+  },
+  model: {
+    provider: "groq",
+    model: "mixtral-8x7b-32768",
+    messages: [
+      {
+        role: "system",
+        content: `You are an advanced AI voice assistant integrated
+         into the Anovas platform. Your role is to provide clear, concise, and 
+         helpful responses to user queries. Maintain a professional yet friendly tone, 
+         ensuring users feel guided and supported. Adapt your responses based on context and user needs,
+          offering relevant solutions, technical assistance, or conversational engagement. 
+        Always prioritize accuracy, efficiency, and user satisfaction.`
+      }
+    ]
+  }
+};
 
 interface NavLinkProps {
   children: React.ReactNode;
@@ -17,6 +51,11 @@ const Header = () => {
   const [showMainHeader, setShowMainHeader] = useState(true);
   const [showBottomNav, setShowBottomNav] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+  
+  // Voice agent states
+  const [connecting, setConnecting] = useState<boolean>(false);
+  const [connected, setConnected] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,8 +65,43 @@ const Header = () => {
       setLastScrollY(currentScrollY);
     };
 
+    // Vapi event listeners
+    const handleCallStart = () => {
+      console.log("Call started");  // Added for debugging
+      setConnecting(false);
+      setConnected(true);
+      setError("");
+    };
+
+    const handleCallEnd = () => {
+      console.log("Call ended");  // Added for debugging
+      setConnecting(false);
+      setConnected(false);
+      setError("");
+    };
+
+    const handleError = (errorObj: any) => {
+      console.error("Vapi Error:", errorObj);
+      setConnecting(false);
+      setConnected(false);  // Ensure connected state is reset on error
+      setError(errorObj.error?.message || "An error occurred");
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    // Add Vapi event listeners
+    vapi.on("call-start", handleCallStart);
+    vapi.on("call-end", handleCallEnd);
+    vapi.on("error", handleError);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      
+      // Remove Vapi event listeners
+      vapi.off("call-start", handleCallStart);
+      vapi.off("call-end", handleCallEnd);
+      vapi.off("error", handleError);
+    };
   }, [lastScrollY]);
 
   const scrollToSection = (sectionId: string) => {
@@ -41,6 +115,45 @@ const Header = () => {
         behavior: 'smooth'
       });
       setIsMenuOpen(false);
+    }
+  };
+
+  // Voice agent start/stop functions
+  const startVoiceAgent = async () => {
+    try {
+      console.log("Attempting to start voice agent");  // Added for debugging
+      setConnecting(true);
+      await vapi.start(assistantOptions);
+    } catch (err) {
+      console.error("Failed to start voice agent:", err);
+      setError("Failed to start voice agent");
+      setConnecting(false);
+      setConnected(false);
+    }
+  };
+
+  const stopVoiceAgent = async () => {
+    try {
+      console.log("Attempting to stop voice agent");  // Added for debugging
+      await vapi.stop();
+      // Explicitly reset states
+      setConnecting(false);
+      setConnected(false);
+      setError("");
+    } catch (err) {
+      console.error("Failed to stop voice agent:", err);
+      setError("Failed to stop voice agent");
+      setConnected(false);
+      setConnecting(false);
+    }
+  };
+
+  // Voice agent toggle function
+  const toggleVoiceAgent = () => {
+    if (connected) {
+      stopVoiceAgent();
+    } else {
+      startVoiceAgent();
     }
   };
 
@@ -199,20 +312,29 @@ const Header = () => {
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => scrollToSection('voice-agent')}
-                className="flex flex-col items-center text-gray-200 hover:text-violet-400 transition-colors duration-300"
+                onClick={toggleVoiceAgent}
+                className={`flex flex-col items-center text-gray-200 
+                  ${connected ? 'text-red-400' : 'hover:text-violet-400'} 
+                  transition-colors duration-300`}
               >
                 <img
                   src={voice}
                   alt="Voice"
-                  className="w-10 h-10 object-cover"
+                  className={`w-10 h-10 object-cover 
+                    ${connecting ? 'animate-pulse' : ''}`}
                 />
-                {/* <span className="text-xs mt-1">Voice</span> */}
+                {connected && (
+                  <span className="text-xs text-red-400 mt-1">Active</span>
+                )}
+                {connecting && (
+                  <span className="text-xs text-yellow-400 mt-1">Connecting</span>
+                )}
               </motion.button>
             </div>
           </div>
         </div>
       </motion.div>
+
     </>
   );
 };

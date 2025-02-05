@@ -16,7 +16,7 @@ import CrossMarquee from './components/CrossMarquee';
 import WhatsAppButton from './components/WhatsaAppButton';
 import {Chatbot} from './components/chatbot/Chat';
 import ProjectMarquee from './components/ProjectMarquee'
-
+import Voice from './components/chatbot/Voice'
 // Create a Home component to wrap all your main page content
 const Home = () => {
   return (
@@ -32,6 +32,7 @@ const Home = () => {
         <OurProcess />
         
         <Testimonials />
+        <ProjectMarquee/>
         <Team />
         <OrbitingCirclesDemo/> 
         <CrossMarquee/>       
@@ -55,6 +56,8 @@ function App() {
           >
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/voice" element={<Voice />} />
+
               
 
             </Routes>

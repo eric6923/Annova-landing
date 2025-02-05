@@ -15,7 +15,7 @@ const stats: Stat[] = [
 
 function App() {
   return (
-    <div className="bg-black flex items-center justify-center">
+    <div className="bg-black border-t border-b border-gray-500 p-4 flex items-center justify-center">
       <div className="w-full marquee-container">
         <div className="flex relative">
           {/* First set */}
