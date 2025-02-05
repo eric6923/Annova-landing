@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Volume2, VolumeX, Play, Pause } from 'lucide-react';
 import video from './assets/test1.mp4'
 
@@ -41,8 +41,16 @@ const testimonials: Testimonial[] = [
 const Testimonials: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Handle initial video load and index changes
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    }
+  }, [currentIndex]);
 
   const next = () => {
     setCurrentIndex((prevIndex) => 
@@ -68,9 +76,25 @@ const Testimonials: React.FC = () => {
       if (isPlaying) {
         videoRef.current.pause();
       } else {
-        videoRef.current.play();
+        // Ensure video starts from beginning if it ended
+        if (videoRef.current.ended) {
+          videoRef.current.currentTime = 0;
+        }
+        videoRef.current.play()
+          .catch(error => {
+            console.error('Error playing video:', error);
+            setIsPlaying(false);
+          });
       }
       setIsPlaying(!isPlaying);
+    }
+  };
+
+  // Handle video end
+  const handleVideoEnd = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+      setIsPlaying(false);
     }
   };
 
@@ -96,10 +120,10 @@ const Testimonials: React.FC = () => {
             <div className="relative w-full max-w-[280px] lg:max-w-sm aspect-[3/4] rounded-3xl overflow-hidden mb-6">
               <video
                 ref={videoRef}
-                autoPlay
                 loop
                 muted={isMuted}
                 playsInline
+                onEnded={handleVideoEnd}
                 className="absolute inset-0 w-full h-full object-cover"
               >
                 <source src={testimonials[currentIndex].video} type="video/mp4" />
