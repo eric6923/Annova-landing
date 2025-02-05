@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
-import { Code, Palette, Globe, Smartphone, Database, Cloud, ArrowRight, MessageCircle } from 'lucide-react';
+import { Code, Palette, Globe, Smartphone, Database, Cloud, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import img from '../components/assets/whatsapp.png'
 import clsx from "clsx";
 
 interface ScrollRevealProps {
@@ -101,7 +101,7 @@ export default function ServicesSection() {
       {/* Content */}
       <ScrollReveal offset={200} className="relative z-10 mx-auto max-w-7xl [--duration:800ms]">
         {(isActive) => (
-          <>
+          <div>
             <div
               className={clsx(
                 { "translate-y-8 opacity-0": !isActive },
@@ -136,7 +136,7 @@ export default function ServicesSection() {
               {services.map((service, index) => (
                 <ScrollReveal key={index} offset={100}>
                   {(isCardActive) => (
-                    <>
+                    <div>
                       {/* Mobile View */}
                       <motion.div
                         className="block lg:hidden relative group"
@@ -161,12 +161,6 @@ export default function ServicesSection() {
                           <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors mb-4">
                             {service.description}
                           </p>
-                          <Link
-                            to={service.path}
-                            className="inline-flex items-center text-violet-400 hover:text-violet-300 transition-colors"
-                          >
-                            See Details <ArrowRight className="ml-2" size={16} />
-                          </Link>
                         </div>
                       </motion.div>
 
@@ -194,15 +188,9 @@ export default function ServicesSection() {
                           <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors mb-4">
                             {service.description}
                           </p>
-                          <Link
-                            to={service.path}
-                            className="inline-flex items-center text-violet-400 hover:text-violet-300 transition-colors"
-                          >
-                            See Details <ArrowRight className="ml-2" size={16} />
-                          </Link>
                         </div>
                       </div>
-                    </>
+                    </div>
                   )}
                 </ScrollReveal>
               ))}
@@ -211,11 +199,11 @@ export default function ServicesSection() {
             {/* WhatsApp Button */}
             <div className="mt-20 mb-8 flex justify-center">
               <a
-                href="https://wa.me/your_number_here"
+                href="https://wa.me/7992193730"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={clsx(
-                  "group flex items-center gap-2 px-6 py-3 rounded-full",
+                  "group flex items-center gap-3 px-6 py-3 rounded-full",
                   "bg-gradient-to-r from-green-500 to-green-600",
                   "hover:from-green-600 hover:to-green-700",
                   "transition-all duration-300 transform hover:scale-105",
@@ -223,10 +211,15 @@ export default function ServicesSection() {
                   "shadow-green-500/25 hover:shadow-green-500/40"
                 )}
               >
-                Chat with us on WhatsApp
+                <img 
+                  src={img}
+                  alt="WhatsApp"
+                  className="w-8 h-8 group-hover:scale-110 transition-transform duration-300"
+                />
+                Chat with us
               </a>
             </div>
-          </>
+          </div>
         )}
       </ScrollReveal>
     </section>

@@ -15,12 +15,7 @@ import Footer from './components/Footer';
 import CrossMarquee from './components/CrossMarquee';
 import WhatsAppButton from './components/WhatsaAppButton';
 import {Chatbot} from './components/chatbot/Chat';
-import SoftwareDevelopment from './components/ServiceComponents/Software';
-import MobileDevelopment from './components/ServiceComponents/Mobile';
-import Branding from './components/ServiceComponents/Branding';
-import AISolutions from './components/ServiceComponents/AISolutions';
-import SocialMediaManagement from './components/ServiceComponents/SocialMedia';
-import AdsCreation from './components/ServiceComponents/AdsCreation';
+import ProjectMarquee from './components/ProjectMarquee'
 
 // Create a Home component to wrap all your main page content
 const Home = () => {
@@ -29,10 +24,12 @@ const Home = () => {
       <main className="space-y-16 md:space-y-24">
         <HeroSection />
         <ServicesSection />
+        
         <WhyChooseUs />
         <WorkedWith />
         <Portfolio />
         <OurProcess />
+        <ProjectMarquee/>
         <Testimonials />
         <Team />
         <OrbitingCirclesDemo/> 
@@ -57,12 +54,7 @@ function App() {
           >
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/software" element={<SoftwareDevelopment />} />
-              <Route path="/mobile" element={<MobileDevelopment />} />
-              <Route path="/branding" element={<Branding />} />
-              <Route path="/ai" element={<AISolutions />} />
-              <Route path="/social" element={<SocialMediaManagement />} />
-              <Route path="/ads" element={<AdsCreation />} />
+              
 
             </Routes>
           </motion.div>
