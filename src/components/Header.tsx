@@ -5,6 +5,7 @@ import Vapi from "@vapi-ai/web";
 import profile from './profile.jpg';
 import Home from '../components/assets/home.png'
 import Privacy from '../components/assets/privacy2.png'
+import {Link} from 'react-router-dom'
 import WhatsAppButton from '../components/assets/whatsapp.png';
 import voice from '../components/assets/voice3.png'
 
@@ -272,19 +273,24 @@ const Header = () => {
         <div className="max-w-7xl mx-auto">
           <div className="my-4 rounded-2xl backdrop-blur-xl bg-gray-800/60 shadow-lg">
             <div className="flex items-center justify-around px-4 py-3">
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => scrollToSection('home')}
-                className="flex flex-col items-center text-gray-200 hover:text-violet-400 transition-colors duration-300"
-              >
-                <img
-                  src={Home}
-                  alt="Home"
-                  className="w-10 h-10 object-cover"
-                />
-                {/* <span className="text-xs mt-1">Home</span> */}
-              </motion.button>
+            <motion.button
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.95 }}
+  onClick={() => {
+    if (window.location.pathname !== '/') {
+      window.location.href = '/';
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }}
+  className="flex flex-col items-center text-gray-200 hover:text-violet-400 transition-colors duration-300"
+>
+  <img
+    src={Home}
+    alt="Home"
+    className="w-10 h-10 object-cover"
+  />
+</motion.button>
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -299,18 +305,18 @@ const Header = () => {
                 
               </motion.button>
               <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => scrollToSection('privacy')}
-                className="flex flex-col items-center text-gray-200 hover:text-violet-400 transition-colors duration-300"
-              >
-                <img
-                  src={Privacy}
-                  alt="Privacy"
-                  className="w-10 h-10 object-cover"
-                />
-                {/* <span className="text-xs mt-1">Privacy</span> */}
-              </motion.button>
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.95 }}
+  className="flex flex-col items-center text-gray-200 hover:text-violet-400 transition-colors duration-300"
+>
+  <Link to="/privacy" onClick={() => window.scrollTo(0, 0)}>
+    <img
+      src={Privacy}
+      alt="Privacy"
+      className="w-10 h-10 object-cover"
+    />
+  </Link>
+</motion.button>
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}

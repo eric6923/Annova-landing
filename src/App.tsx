@@ -13,10 +13,10 @@ import Team from './components/Team';
 import FAQSection from './components/FAQ';
 import Footer from './components/Footer';
 import CrossMarquee from './components/CrossMarquee';
-import WhatsAppButton from './components/WhatsaAppButton';
-import {Chatbot} from './components/chatbot/Chat';
-import ProjectMarquee from './components/ProjectMarquee'
-import Voice from './components/chatbot/Voice'
+import ProjectMarquee from './components/ProjectMarquee';
+import Privacy from './components/Privacy';
+import PopupForm from './components/Popup';
+
 // Create a Home component to wrap all your main page content
 const Home = () => {
   return (
@@ -25,12 +25,10 @@ const Home = () => {
         <HeroSection />
         <ProjectMarquee/>
         <ServicesSection />
-        
         <WhyChooseUs />
         <WorkedWith />
         <Portfolio />
         <OurProcess />
-        
         <Testimonials />
         <ProjectMarquee/>
         <Team />
@@ -56,16 +54,12 @@ function App() {
           >
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/voice" element={<Voice />} />
-
-              
-
+              <Route path="/privacy" element={<Privacy />} />
             </Routes>
           </motion.div>
         </AnimatePresence>
+        <PopupForm />
         <Footer />
-        {/* <WhatsAppButton/>
-        <Chatbot/> */}
       </div>
     </Router>
   );
