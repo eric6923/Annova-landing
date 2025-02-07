@@ -18,8 +18,9 @@ import ProjectMarquee from './components/ProjectMarquee';
 import Privacy from './components/Privacy';
 import PopupForm from './components/Popup';
 import Loader from './components/Loader';
+import Login from './components/Admin/Login';
+import DataShowcase from './components/Admin/DataShowcase';
 
-// Create a Home component to wrap all your main page content
 const Home = () => {
   return (
     <>
@@ -46,7 +47,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading time (you can adjust the duration)
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -62,20 +62,32 @@ function App() {
             <Loader key="loader" />
           ) : (
             <>
-              <Header />
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/privacy" element={<Privacy />} />
-                </Routes>
-              </motion.div>
-              <PopupForm />
-              <Footer />
+              <Routes>
+                <Route
+                  path="/*"
+                  element={
+                    <>
+                      <Header />
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <Routes>
+                          <Route path="/" element={<Home />} />
+                          <Route path="/privacy" element={<Privacy />} />
+                          
+                        </Routes>
+                      </motion.div>
+                      <PopupForm />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route path="/admin" element={<Login />} />
+                <Route path="/data" element={<DataShowcase />} />
+              </Routes>
             </>
           )}
         </AnimatePresence>
