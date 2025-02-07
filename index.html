@@ -3,8 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Improved Viewport Meta Tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
     <title>Vite + React + TS</title>
+
+    <style>
+      /* Prevent shrinking in Desktop Mode on mobile */
+      body {
+        min-width: 1024px;
+        height: 100dvh;
+        overflow-x: hidden;
+        margin: 0;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
