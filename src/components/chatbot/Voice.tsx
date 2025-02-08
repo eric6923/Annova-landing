@@ -34,8 +34,8 @@ type AssistantOptions = {
   };
 };
 
-// Initialize Vapi outside component to prevent multiple instances
-const VAPI_KEY = "699cf8b7-8bff-4c5a-b163-0cd4ce140b6f";
+// Initialize Vapi with string parameter as per TypeScript definition
+const VAPI_KEY = "1a2c7e22-b0de-4341-865a-a436bfadb740";
 const vapi = new Vapi(VAPI_KEY);
 
 const assistantOptions: AssistantOptions = {
