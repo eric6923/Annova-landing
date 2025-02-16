@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Info } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Vapi from "@vapi-ai/web";
 import profile from './profile.jpg';
@@ -59,6 +60,7 @@ const Header = () => {
   const [connected, setConnected] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [isVoiceOpen, setIsVoiceOpen] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -313,84 +315,123 @@ const Header = () => {
       </motion.div>
 
       <AnimatePresence>
-  {isVoiceOpen && (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 pointer-events-none"
-    >
-      <motion.div
-        initial={{ scale: 0.9, y: 20 }}
-        animate={{ scale: 1, y: 0 }}
-        exit={{ scale: 0.9, y: 20 }}
-        className="absolute bottom-24 right-6 pointer-events-auto"
-        style={{ width: '140px' }}
-      >
-        <div className="bg-white rounded-3xl shadow-lg py-7 px-5 relative flex flex-col items-center">
-          <div className="flex space-x-2.5 justify-center mb-5">
-            {connecting ? (
-              <>
-                <motion.div
-                  animate={{
-                    scale: [1, 1.2, 1],
-                  }}
-                  transition={{
-                    duration: 0.8,
-                    repeat: Infinity,
-                    delay: 0,
-                  }}
-                  className="w-3 h-3 bg-[#8AE68A] rounded-full" 
-                />
-                <motion.div
-                  animate={{
-                    scale: [1, 1.2, 1],
-                  }}
-                  transition={{
-                    duration: 0.8,
-                    repeat: Infinity,
-                    delay: 0.2,
-                  }}
-                  className="w-3 h-3 bg-[#8AE68A] rounded-full" 
-                />
-                <motion.div
-                  animate={{
-                    scale: [1, 1.2, 1],
-                  }}
-                  transition={{
-                    duration: 0.8,
-                    repeat: Infinity,
-                    delay: 0.4,
-                  }}
-                  className="w-3 h-3 bg-[#8AE68A] rounded-full"
-                />
-              </>
-            ) : (
-              <div className="flex space-x-2.5">
-                <div className="w-3 h-3 bg-[#8AE68A] rounded-full" />
-                <div className="w-3 h-3 bg-[#8AE68A] rounded-full" />
-                <div className="w-3 h-3 bg-[#8AE68A] rounded-full" />
-              </div>
-            )}
-          </div>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={connected ? stopVoiceAgent : startVoiceAgent}
-            className="w-28 py-2 px-4 bg-gray-800 text-white rounded-xl font-medium 
-              hover:bg-gray-700 transition-colors text-center text-sm shadow-sm " 
+      {isVoiceOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 pointer-events-none"
+        >
+          <motion.div
+            initial={{ scale: 0.9, y: 20 }}
+            animate={{ scale: 1, y: 0 }}
+            exit={{ scale: 0.9, y: 20 }}
+            className="absolute bottom-24 right-6 md:right-60 pointer-events-auto"
+            style={{ width: '140px' }}
           >
-            {connected ? 'Stop' : 'Start'}
-          </motion.button>
+            <div className="bg-white rounded-3xl shadow-lg pt-12 pb-4 px-5 relative flex flex-col items-center">
+              {/* Info Icon with Tooltip */}
+              <div className="absolute left-4 top-4">
+  <div 
+    className="relative"
+    onMouseEnter={() => setShowTooltip(true)}
+    onMouseLeave={() => setShowTooltip(false)}
+  >
+    <Info className="w-4 h-4 text-gray-700 hover:text-gray-800 cursor-help" />
+    
+    {/* Tooltip */}
+    <AnimatePresence>
+      {showTooltip && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+          className="absolute left-0 bottom-full mb-2 w-48 p-2 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-50"
+        >
+          This is Anovas personal voice assistant. It helps you navigate and control the application using voice commands.
+        </motion.div>
+      )}
+    </AnimatePresence>
+  </div>
+</div>
 
-          {error && (
-            <p className="text-red-500 text-xs text-center mt-2">{error}</p>
-          )}
-        </div>
-      </motion.div>
-    </motion.div>
-  )}
-</AnimatePresence>
+              {/* Close Icon */}
+              <button 
+  className="absolute right-4 top-4"
+  onClick={() => {
+    if (connected) {
+      stopVoiceAgent();
+    }
+    setIsVoiceOpen(false);
+  }}
+>
+  <X className="w-4 h-4 text-gray-700 hover:text-gray-800" />
+</button>
+
+              <div className="flex space-x-2.5 justify-center mb-5 ">
+                {connecting ? (
+                  <>
+                    <motion.div
+                      animate={{
+                        scale: [1, 1.2, 1],
+                      }}
+                      transition={{
+                        duration: 0.8,
+                        repeat: Infinity,
+                        delay: 0,
+                      }}
+                      className="w-3 h-3 bg-[#8AE68A] rounded-full" 
+                    />
+                    <motion.div
+                      animate={{
+                        scale: [1, 1.2, 1],
+                      }}
+                      transition={{
+                        duration: 0.8,
+                        repeat: Infinity,
+                        delay: 0.2,
+                      }}
+                      className="w-3 h-3 bg-[#8AE68A] rounded-full" 
+                    />
+                    <motion.div
+                      animate={{
+                        scale: [1, 1.2, 1],
+                      }}
+                      transition={{
+                        duration: 0.8,
+                        repeat: Infinity,
+                        delay: 0.4,
+                      }}
+                      className="w-3 h-3 bg-[#8AE68A] rounded-full"
+                    />
+                  </>
+                ) : (
+                  <div className="flex space-x-2.5">
+                    <div className="w-3 h-3 bg-[#8AE68A] rounded-full" />
+                    <div className="w-3 h-3 bg-[#8AE68A] rounded-full" />
+                    <div className="w-3 h-3 bg-[#8AE68A] rounded-full" />
+                  </div>
+                )}
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={connected ? stopVoiceAgent : startVoiceAgent}
+                className="w-28 py-2 px-4 bg-gray-800 text-white rounded-xl font-medium 
+                  hover:bg-gray-700 transition-colors text-center text-sm shadow-sm"
+              >
+                {connected ? 'Stop' : 'Start'}
+              </motion.button>
+
+              {error && (
+                <p className="text-red-500 text-xs text-center mt-2">{error}</p>
+              )}
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   </>
 );
 };
