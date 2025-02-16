@@ -387,7 +387,7 @@ const Header = () => {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}
-      className="absolute left-0 sm:left-0 -left-4 bottom-full mb-2 w-48 p-2 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-50"
+      className="absolute  sm:left-0 -left-12 bottom-full mb-2 w-48 p-2 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-50"
     >
       This is Anovas personal voice assistant. It helps you
       navigate and control the application using voice
